@@ -72,7 +72,7 @@ public class Test {
 				int anadir = teclado.nextInt();
 				switch (anadir) {
 				case 1:
-					System.out.println("Introduzca un id de los que ves en la pantalla");
+					System.out.println("Introduzca un id diferente de los que ves en la pantalla");
 					control.leerActoresId();
 					teclado.nextLine();
 					System.out.println("Introduzca id del actor");
@@ -99,7 +99,7 @@ public class Test {
 					}
 					break;
 				case 2:
-					System.out.println("Introduzca un id de los que ves en la pantalla");
+					System.out.println("Introduzca un id diferente de los que ves en la pantalla");
 					control.leerRepresentantesId();
 					teclado.nextLine();
 					System.out.println("Introduzca id del representante");
