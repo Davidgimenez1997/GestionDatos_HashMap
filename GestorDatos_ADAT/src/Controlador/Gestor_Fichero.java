@@ -90,7 +90,6 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 			bw.write("*");
 			bw.write("\n");
 			bw.close();
-			System.out.println("Actor agregado correctamente");
 		}
 		return 0;
 	}
@@ -120,7 +119,6 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 			bw.write("\n");
 			bw.write("*");
 			bw.write("\n");
-			System.out.println("Representante agregado correctamente");
 			bw.close();
 		}
 		return 0;
@@ -128,11 +126,35 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
-
+		borrarTodoActores();
+		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+			agregarActor(lista.get(entry.getKey()));
+		}
 	}
 
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
+		borrarTodoRepresentantes();
+		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+			agregarRepresentante(lista.get(entry.getKey()));
+		}
+	}
+
+	@Override
+	public int borrarTodoActores() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("src/actores.txt"));
+		bw.write("");
+		bw.close();
+		return 0;
+	}
+
+	@Override
+	public int borrarTodoRepresentantes() throws IOException {
+		borrarTodoActores();
+		BufferedWriter bw = new BufferedWriter(new FileWriter("src/representantes.txt"));
+		bw.write("");
+		bw.close();
+		return 0;
 	}
 
 }

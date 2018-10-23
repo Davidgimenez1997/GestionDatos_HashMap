@@ -2,6 +2,7 @@ package Controlador;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Modelo.Actor;
@@ -85,14 +86,65 @@ public class Controlador {
 		primario.agregarRepresentante(repres);
 	}
 
-	public void importar(int importar) {
-		// TODO Auto-generated method stub
-
+	public void importar(int importar) throws IOException {
+		if (importar == 1) {
+			secundario = new Gestor_Fichero();
+			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
+			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
+			primario.escribirtodosRepresentante(leer_representante);
+			primario.escribirtodosActores(leer_actores);
+		} else if (importar == 2) {
+			secundario = new Gestor_BBDD("src/Configuracion.ini");
+			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
+			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
+			primario.escribirtodosRepresentante(leer_representante);
+			primario.escribirtodosActores(leer_actores);
+		} 
+		/*
+		 * else if (importar == 3){
+		
+			secundario = new GestorHibernate();
+			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
+			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
+			primario.escribirtodosRepresentante(leer_representante);
+			primario.escribirtodosActores(leer_actores);
+			
+		}
+		 */
 	}
 
-	public void exportar(int exportar) {
-		// TODO Auto-generated method stub
+	public void exportar(int exportar) throws IOException {
+		if (exportar == 1) {
+			secundario = new Gestor_Fichero();
+			HashMap<String, Actor> leer_actores = primario.leertodosActores();
+			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
+			secundario.escribirtodosRepresentante(leer_representante);
+			secundario.escribirtodosActores(leer_actores);
 
+		} else if (exportar == 2) {
+			secundario = new Gestor_BBDD("src/Configuracion.ini");
+			HashMap<String, Actor> leer_actores = primario.leertodosActores();
+			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
+			secundario.escribirtodosRepresentante(leer_representante);
+			secundario.escribirtodosActores(leer_actores);
+		} 
+		/*else if(exportar == 3){
+			secundario = new GestorHibernate();
+			ArrayList<Actores> leer_actores = primario.leertodosActores();
+			ArrayList<Representante> leer_representante = primario.leertodosRepresentante();
+			secundario.escribirtodosRepresentante(leer_representante);
+			secundario.escribirtodosActores(leer_actores);
+		}
+*/
+	}
+
+	public void borrarRepresentantes() throws IOException {
+		primario.borrarTodoRepresentantes();
+		
+	}
+
+	public void borrarActores() throws IOException {
+		primario.borrarTodoActores();
 	}
 
 }

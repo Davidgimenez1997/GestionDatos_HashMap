@@ -45,7 +45,8 @@ public class Test {
 			System.out.println("2.Agregar uno a");
 			System.out.println("3.Importar datos a");
 			System.out.println("4.Exportar datos a");
-			System.out.println("5.Salir");
+			System.out.println("5.Borrar todos de");
+			System.out.println("6.Salir");
 			opcion = teclado.nextInt();
 			switch (opcion) {
 			case 1:
@@ -195,6 +196,25 @@ public class Test {
 				}
 				break;
 			case 5:
+				System.out.println("¿De donde deseas borrar todo?");
+				System.out.println("1.Actores");
+				System.out.println("2.Representantes (Si borras esta entidad se borra Actores,ya que esta relaccionada.");
+				int borrartodo = teclado.nextInt();
+				switch (borrartodo) {
+				case 1:
+					control.borrarActores();
+					System.out.println("Datos borrados de " + tipo);
+					break;
+				case 2:
+					control.borrarRepresentantes();
+					System.out.println("Datos borrados de " + tipo);
+					break;
+				default:
+					System.out.println("Opcion no valida");
+					break;
+				}	
+				break;
+			case 6:
 				salir = false;
 				break;
 			default:

@@ -4,5 +4,3 @@
 *
 3:Gloria:19
 *
-4:Nombre:Edad
-*
