@@ -2,7 +2,11 @@ package Controlador;
 
 import java.io.IOException;
 import java.util.HashMap;
-
+import java.io.FileNotFoundException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -30,14 +34,28 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 
 	@Override
 	public HashMap<String, Actor> leertodosActores() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Actor> actores = new HashMap<String, Actor>();
+        Query q = s.createQuery("select e from Actor e");
+        List results = q.list();
+        Iterator Iterator = results.iterator();
+        while (Iterator.hasNext()) {
+            Actor actor = (Actor) Iterator.next();
+            actores.put(actor.getId(), actor);
+        }
+        return actores;
 	}
 
 	@Override
 	public HashMap<String, Representante> leertodosRepresentante() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Representante> representantes = new HashMap<String, Representante>();
+        Query q = s.createQuery("select e from Representante e");
+        List results = q.list();
+        Iterator Iterator = results.iterator();
+        while (Iterator.hasNext()) {
+            Representante repre = (Representante) Iterator.next();
+            representantes.put(repre.getId(), repre);
+        }
+		return representantes;
 	}
 
 	@Override
