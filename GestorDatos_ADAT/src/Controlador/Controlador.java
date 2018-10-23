@@ -15,9 +15,9 @@ public class Controlador {
 		if (acceso == 1) {
 			primario = new Gestor_Fichero();
 		} else if (acceso == 2) {
-			 primario = new Gestor_BBDD("src/Configuracion.ini");
+			primario = new Gestor_BBDD("src/Configuracion.ini");
 		} else if (acceso == 3) {
-			 primario = new Gestor_Hibernate();
+			primario = new Gestor_Hibernate();
 		}
 	}
 
@@ -98,18 +98,15 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
-		} 
-		/*
-		 * else if (importar == 3){
-		
-			secundario = new GestorHibernate();
+		} else if (importar == 3) {
+			secundario = new Gestor_Hibernate();
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
-			
+
 		}
-		 */
+
 	}
 
 	public void exportar(int exportar) throws IOException {
@@ -126,20 +123,17 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
-		} 
-		/*else if(exportar == 3){
-			secundario = new GestorHibernate();
-			ArrayList<Actores> leer_actores = primario.leertodosActores();
-			ArrayList<Representante> leer_representante = primario.leertodosRepresentante();
+		} else if (exportar == 3) {
+			secundario = new Gestor_Hibernate();
+			HashMap<String, Actor> leer_actores = primario.leertodosActores();
+			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
 		}
-*/
 	}
 
 	public void borrarRepresentantes() throws IOException {
 		primario.borrarTodoRepresentantes();
-		
 	}
 
 	public void borrarActores() throws IOException {

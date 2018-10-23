@@ -108,25 +108,38 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
-		// TODO Auto-generated method stub
-
+		borrarTodoActores();
+		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+			agregarActor(lista.get(entry.getKey()));
+		}
 	}
 
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
-		// TODO Auto-generated method stub
-
+		borrarTodoRepresentantes();
+		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+			agregarRepresentante(lista.get(entry.getKey()));
+		}
 	}
 
 	@Override
 	public int borrarTodoActores() throws IOException {
-		// TODO Auto-generated method stub
+		s.beginTransaction();
+		String stringQuery = "DELETE FROM Actor";
+		Query query = s.createQuery(stringQuery);
+		query.executeUpdate();
+		s.getTransaction().commit();
 		return 0;
 	}
 
 	@Override
 	public int borrarTodoRepresentantes() throws IOException {
-		// TODO Auto-generated method stub
+		borrarTodoActores();
+		s.beginTransaction();
+		String stringQuery = "DELETE FROM Representante";
+		Query query = s.createQuery(stringQuery);
+		query.executeUpdate();
+		s.getTransaction().commit();
 		return 0;
 	}
 
