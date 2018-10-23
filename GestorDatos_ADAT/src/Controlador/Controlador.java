@@ -15,7 +15,7 @@ public class Controlador {
 		if (acceso == 1) {
 			primario = new Gestor_Fichero();
 		} else if (acceso == 2) {
-			// primario = new GestorBBDD("src/Configuracion.ini");
+			 primario = new Gestor_BBDD("src/Configuracion.ini");
 		} else if (acceso == 3) {
 			// primario = new GestorHibernate();
 		}
