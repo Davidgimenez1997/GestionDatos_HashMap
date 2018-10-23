@@ -2,7 +2,6 @@ package Controlador;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import Modelo.Actor;
@@ -18,7 +17,7 @@ public class Controlador {
 		} else if (acceso == 2) {
 			 primario = new Gestor_BBDD("src/Configuracion.ini");
 		} else if (acceso == 3) {
-			// primario = new GestorHibernate();
+			 primario = new Gestor_Hibernate();
 		}
 	}
 
