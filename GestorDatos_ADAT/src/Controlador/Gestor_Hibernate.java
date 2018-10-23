@@ -35,50 +35,74 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 	@Override
 	public HashMap<String, Actor> leertodosActores() throws IOException {
 		HashMap<String, Actor> actores = new HashMap<String, Actor>();
-        Query q = s.createQuery("select e from Actor e");
-        List results = q.list();
-        Iterator Iterator = results.iterator();
-        while (Iterator.hasNext()) {
-            Actor actor = (Actor) Iterator.next();
-            actores.put(actor.getId(), actor);
-        }
-        return actores;
+		Query q = s.createQuery("select e from Actor e");
+		List results = q.list();
+		Iterator Iterator = results.iterator();
+		while (Iterator.hasNext()) {
+			Actor actor = (Actor) Iterator.next();
+			actores.put(actor.getId(), actor);
+		}
+		return actores;
 	}
 
 	@Override
 	public HashMap<String, Representante> leertodosRepresentante() throws IOException {
 		HashMap<String, Representante> representantes = new HashMap<String, Representante>();
-        Query q = s.createQuery("select e from Representante e");
-        List results = q.list();
-        Iterator Iterator = results.iterator();
-        while (Iterator.hasNext()) {
-            Representante repre = (Representante) Iterator.next();
-            representantes.put(repre.getId(), repre);
-        }
+		Query q = s.createQuery("select e from Representante e");
+		List results = q.list();
+		Iterator Iterator = results.iterator();
+		while (Iterator.hasNext()) {
+			Representante repre = (Representante) Iterator.next();
+			representantes.put(repre.getId(), repre);
+		}
 		return representantes;
 	}
 
 	@Override
 	public int agregarActor(Actor nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		if (comprobaridactor(nuevo)) {
+			s.beginTransaction();
+			s.save(nuevo);
+			s.getTransaction().commit();
+		}
 		return 0;
 	}
 
 	@Override
 	public boolean comprobaridactor(Actor nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		Actor act = nuevo;
+		try {
+			act = (Actor) s.get(Actor.class, act.getId());
+		} catch (Exception e) {
+
+		}
+		if (act == null) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean comprobaridrepresentante(Representante nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		Representante repre = nuevo;
+		try {
+			repre = (Representante) s.get(Representante.class, repre.getId());
+		} catch (Exception e) {
+
+		}
+		if (repre == null) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public int agregarRepresentante(Representante nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		if (comprobaridrepresentante(nuevo)) {
+			s.beginTransaction();
+			s.save(nuevo);
+			s.getTransaction().commit();
+		}
 		return 0;
 	}
 
