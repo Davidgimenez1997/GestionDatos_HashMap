@@ -58,7 +58,8 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		return representantes;
 	}
 
-	public boolean comprobarIdActor(Actor nuevo) throws IOException {
+	@Override
+	public boolean comprobaridactor(Actor nuevo) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
@@ -71,7 +72,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 
 	@Override
 	public int agregarActor(Actor nuevo) throws IOException {
-		if(!comprobarIdActor(nuevo)){
+		if (!comprobaridactor(nuevo)) {
 			FileWriter fw = new FileWriter("src/actores.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(nuevo.getId());
@@ -93,8 +94,9 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		}
 		return 0;
 	}
-	
-	public boolean comprobarIdRepresentante(Representante nuevo) throws IOException {
+
+	@Override
+	public boolean comprobaridrepresentante(Representante nuevo) throws IOException {
 		HashMap<String, Representante> ver = leertodosRepresentante();
 		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
@@ -107,7 +109,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 
 	@Override
 	public int agregarRepresentante(Representante nuevo) throws IOException {
-		if(!comprobarIdRepresentante(nuevo)){
+		if (!comprobaridrepresentante(nuevo)) {
 			FileWriter fw = new FileWriter("src/representantes.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(nuevo.getId());
@@ -126,7 +128,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
-		
+
 	}
 
 	@Override

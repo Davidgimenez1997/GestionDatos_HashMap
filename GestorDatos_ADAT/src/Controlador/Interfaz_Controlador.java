@@ -13,6 +13,10 @@ public interface Interfaz_Controlador {
 	public HashMap<String, Representante> leertodosRepresentante() throws IOException;
 
 	public int agregarActor(Actor nuevo) throws IOException;
+	
+	public boolean comprobaridactor(Actor nuevo) throws IOException;
+	
+	public boolean comprobaridrepresentante(Representante nuevo) throws IOException;
 
 	public int agregarRepresentante(Representante nuevo) throws IOException;
 
