@@ -1,0 +1,6 @@
+1:Johnny:Actor:Negro:Rojo:2
+*
+2:Kaya:Actriz:Café oscuro:Azul:1
+*
+3:Javier:Actor:Azul:Rojo:3
+*
