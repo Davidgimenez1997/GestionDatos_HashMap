@@ -46,7 +46,8 @@ public class Test {
 			System.out.println("3.Importar datos a");
 			System.out.println("4.Exportar datos a");
 			System.out.println("5.Borrar todos de");
-			System.out.println("6.Salir");
+			System.out.println("6.Modificar uno de");
+			System.out.println("7.Salir");
 			opcion = teclado.nextInt();
 			switch (opcion) {
 			case 1:
@@ -93,7 +94,11 @@ public class Test {
 					Representante obj_repre = control.escojerRepresentante(id_repre);
 					if (obj_repre != null) {
 						Actor nuevo = new Actor(id, nombre, desc, pelo, ojos, obj_repre);
-						control.pedirdatosagregarActor(nuevo);
+						if(control.pedirdatosagregarActor(nuevo)){
+							System.out.println("Actor añadido correctamente a "+tipo);
+						}else{
+							System.out.println("No se a podido añadir el actor a "+tipo);
+						}
 						break;
 					} else {
 						System.out.println("No se a podido agregar el actor, el representante no a sido encontrado en la tabla representantes");
@@ -110,7 +115,11 @@ public class Test {
 					System.out.println("Introduzca la edad del representante");
 					String edadrepresentante = teclado.nextLine();
 					Representante repres = new Representante(idrepresentante, nombrerepresentante, edadrepresentante);
-					control.pedirdatosagregarRepresentante(repres);
+					if(control.pedirdatosagregarRepresentante(repres)){
+						System.out.println("Representante añadido correctamente a "+tipo);
+					}else{
+						System.out.println("No se a podido añadir el representante a "+tipo);
+					}
 					break;
 				default:
 					System.out.println("Opcion no valida");
@@ -203,11 +212,25 @@ public class Test {
 				switch (borrartodo) {
 				case 1:
 					control.borrarActores();
-					System.out.println("Datos borrados de " + tipo);
+					System.out.println("Actores borrados de " + tipo);
 					break;
 				case 2:
-					control.borrarRepresentantes();
-					System.out.println("Datos borrados de " + tipo);
+					teclado.nextLine();
+					System.out.println("¿Estas seguro de borrar?Y/N");
+					String seguro = teclado.nextLine();
+					switch (seguro.toLowerCase()) {
+					case "s":
+						control.borrarRepresentantes();
+						System.out.println("Actores y representantes borrados de " + tipo);
+						break;
+					case "n":
+						System.out.println("Cancelado el borrado de Actores y representantes");
+						break;
+					default:
+						System.out.println("Opcion no valida");
+						break;
+					}
+					
 					break;
 				default:
 					System.out.println("Opcion no valida");
@@ -215,6 +238,67 @@ public class Test {
 				}	
 				break;
 			case 6:
+				teclado.nextLine();
+				System.out.println("¿De donde deseas modificar?");
+				System.out.println("1.Actores");
+				System.out.println("2.Representantes");
+				int op_modificar = teclado.nextInt();
+				switch (op_modificar) {
+				case 1:
+					System.out.println("Id de los actores escoja uno:");
+					control.leerActoresId();
+					break;
+				case 2:
+					System.out.println("Id de los representantes escoja uno:");
+					control.leerRepresentantesId();
+					break;
+				default:
+					System.out.println("Opcion no valida");
+					break;
+				}
+				teclado.nextLine();
+				System.out.println("Escribe el id del dato que quieres modificar");
+				String modificar = teclado.nextLine();
+				switch (op_modificar) {
+				case 1:
+					System.out.println("Escriba el nuevo nombre");
+					String nuevonombre = teclado.nextLine();
+					System.out.println("Escriba la nueva descripcion");
+					String nuevadescr = teclado.nextLine();
+					System.out.println("Escriba el nuevo color de pelo");
+					String nuevopelo = teclado.nextLine();
+					System.out.println("Escriba el nuevo color de ojos");
+					String nuevoojos = teclado.nextLine();
+					System.out.println("Id de los representantes escoja uno:");
+					control.leerRepresentantesId();
+					System.out.println("Escriba el nuevo id del representante");
+					String nuevorepre = teclado.nextLine();
+					Representante obj = new Representante(nuevorepre);
+					Actor actmodificar = new Actor(nuevonombre, nuevadescr, nuevopelo, nuevoojos,obj);
+					if(control.ModificarUnActor(modificar, actmodificar)){
+						System.out.println("Actor modificado correctamente de "+tipo);
+					}else{
+						System.out.println("No se pudo modificar el actor de "+tipo);
+					}
+					break;
+				case 2:
+					System.out.println("Escriba el nuevo nombre");
+					String nuevonombrerepre = teclado.nextLine();
+					System.out.println("Escriba la nueva edad");
+					String nuevaedad = teclado.nextLine();
+					Representante reprmodificar = new Representante(nuevonombrerepre, nuevaedad);
+					if(control.ModificarUnRepresentante(modificar, reprmodificar)){
+						System.out.println("Representante modificado correctamente de "+tipo);
+					}else{
+						System.out.println("No se pudo modificar el representante de "+tipo);
+					}
+					break;
+				default:
+					System.out.println("Opcion no valida");
+					break;
+				}
+				break;
+			case 7:
 				salir = false;
 				break;
 			default:

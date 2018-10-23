@@ -25,7 +25,7 @@ public class Controlador {
 		HashMap<String, Actor> ver = primario.leertodosActores();
 		int cont = 1;
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
-			System.out.println("<----Actor " + cont + " ---->");
+			System.out.println("<---- Actor " + cont + " ---->");
 			System.out.println("Id: " + entry.getValue().getId());
 			System.out.println("Nombre: " + entry.getValue().getNombre());
 			System.out.println("Descripcion: " + entry.getValue().getDescripcion());
@@ -40,7 +40,7 @@ public class Controlador {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		int cont = 1;
 		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
-			System.out.println("<----Representante " + cont + " ---->");
+			System.out.println("<---- Representante " + cont + " ---->");
 			System.out.println("Id: " + entry.getValue().getId());
 			System.out.println("Nombre: " + entry.getValue().getNombre());
 			System.out.println("Edad: " + entry.getValue().getEdad());
@@ -51,15 +51,17 @@ public class Controlador {
 	public void leerActoresId() throws IOException {
 		HashMap<String, Actor> ver = primario.leertodosActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
-			System.out.println("Id: " + entry.getValue().getId());
+			System.out.print(entry.getValue().getId() + " ");
 		}
+		System.out.println();
 	}
 
 	public void leerRepresentantesId() throws IOException {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
-			System.out.println("Id: " + entry.getValue().getId());
+			System.out.print(entry.getValue().getId() + " ");
 		}
+		System.out.println();
 	}
 
 	public Representante escojerRepresentante(String id_repre) throws IOException {
@@ -77,12 +79,18 @@ public class Controlador {
 		return elegir_repre;
 	}
 
-	public void pedirdatosagregarActor(Actor nuevo) throws IOException {
-		primario.agregarActor(nuevo);
+	public boolean pedirdatosagregarActor(Actor nuevo) throws IOException {
+		if (primario.agregarActor(nuevo)) {
+			return true;
+		}
+		return false;
 	}
 
-	public void pedirdatosagregarRepresentante(Representante repres) throws IOException {
-		primario.agregarRepresentante(repres);
+	public boolean pedirdatosagregarRepresentante(Representante repres) throws IOException {
+		if (primario.agregarRepresentante(repres)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void importar(int importar) throws IOException {
@@ -104,9 +112,7 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
-
 		}
-
 	}
 
 	public void exportar(int exportar) throws IOException {
@@ -138,6 +144,21 @@ public class Controlador {
 
 	public void borrarActores() throws IOException {
 		primario.borrarTodoActores();
+	}
+
+	public boolean ModificarUnActor(String modificar, Actor actmodificar) throws IOException {
+		if(primario.modificarUnActor(modificar, actmodificar)){
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean ModificarUnRepresentante(String modificar, Representante reprmodificar) throws IOException {
+		if(primario.modificarUnRepresentante(modificar, reprmodificar)){
+			return true;
+		}
+		return false;
 	}
 
 }

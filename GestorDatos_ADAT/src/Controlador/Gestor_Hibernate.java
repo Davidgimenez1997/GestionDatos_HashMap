@@ -2,10 +2,8 @@ package Controlador;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,13 +57,14 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int agregarActor(Actor nuevo) throws IOException {
+	public boolean agregarActor(Actor nuevo) throws IOException {
 		if (comprobaridactor(nuevo)) {
 			s.beginTransaction();
 			s.save(nuevo);
 			s.getTransaction().commit();
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 	@Override
@@ -79,6 +78,7 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 		if (act == null) {
 			return true;
 		}
+		System.out.println("Id del actor repetido");
 		return false;
 	}
 
@@ -93,17 +93,19 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 		if (repre == null) {
 			return true;
 		}
+		System.out.println("Id del representante repetido");
 		return false;
 	}
 
 	@Override
-	public int agregarRepresentante(Representante nuevo) throws IOException {
+	public boolean agregarRepresentante(Representante nuevo) throws IOException {
 		if (comprobaridrepresentante(nuevo)) {
 			s.beginTransaction();
 			s.save(nuevo);
 			s.getTransaction().commit();
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 	@Override
@@ -141,6 +143,18 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 		query.executeUpdate();
 		s.getTransaction().commit();
 		return 0;
+	}
+
+	@Override
+	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

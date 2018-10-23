@@ -111,7 +111,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 			while (rset.next()) {
 				for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 					if (entry.getValue().getId().equals(nuevo.getId())) {
-						System.out.println("Id repetido");
+						System.out.println("Id del actor repetido");
 						return true;
 					}
 				}
@@ -124,7 +124,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int agregarActor(Actor nuevo) throws IOException {
+	public boolean agregarActor(Actor nuevo) throws IOException {
 		int r = 0;
 		try {
 			if (!comprobaridactor(nuevo)) {
@@ -138,6 +138,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 					sql.setString(5, nuevo.getOjos());
 					sql.setString(6, nuevo.getRepresentante().getId());
 					r = sql.executeUpdate();
+					return true;
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -145,7 +146,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return r;
+		return false;
 	}
 
 	@Override
@@ -159,7 +160,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 				for (int i = 0; i < leertodosActores().size(); i++) {
 					for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
 						if (entry.getValue().getId().equals(nuevo.getId())) {
-							System.out.println("Id repetido");
+							System.out.println("Id del representante repetido");
 							return true;
 						}
 					}
@@ -173,7 +174,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int agregarRepresentante(Representante nuevo) throws IOException {
+	public boolean agregarRepresentante(Representante nuevo) throws IOException {
 		int r = 0;
 		try {
 			if (!comprobaridrepresentante(nuevo)) {
@@ -184,6 +185,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 					sql.setString(2, nuevo.getNombre());
 					sql.setString(3, nuevo.getEdad());
 					r = sql.executeUpdate();
+					return true;
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -191,7 +193,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		return r;
+		return false;
 	}
 
 	@Override
@@ -237,6 +239,18 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 			e.printStackTrace();
 		}
 		return r;
+	}
+
+	@Override
+	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

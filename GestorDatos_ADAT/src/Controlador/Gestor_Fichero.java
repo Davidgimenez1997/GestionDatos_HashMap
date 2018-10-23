@@ -63,7 +63,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		HashMap<String, Actor> ver = leertodosActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
-				System.out.println("Id repetido");
+				System.out.println("Id del actor repetido");
 				return true;
 			}
 		}
@@ -71,7 +71,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int agregarActor(Actor nuevo) throws IOException {
+	public boolean agregarActor(Actor nuevo) throws IOException {
 		if (!comprobaridactor(nuevo)) {
 			FileWriter fw = new FileWriter("src/actores.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -90,8 +90,9 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 			bw.write("*");
 			bw.write("\n");
 			bw.close();
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 	@Override
@@ -99,7 +100,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		HashMap<String, Representante> ver = leertodosRepresentante();
 		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
-				System.out.println("Id repetido");
+				System.out.println("Id del representante repetido");
 				return true;
 			}
 		}
@@ -107,7 +108,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int agregarRepresentante(Representante nuevo) throws IOException {
+	public boolean agregarRepresentante(Representante nuevo) throws IOException {
 		if (!comprobaridrepresentante(nuevo)) {
 			FileWriter fw = new FileWriter("src/representantes.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -120,8 +121,9 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 			bw.write("*");
 			bw.write("\n");
 			bw.close();
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
 	@Override
@@ -155,6 +157,26 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		bw.write("");
 		bw.close();
 		return 0;
+	}
+
+	@Override
+	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
+		HashMap<String, Actor> ver = leertodosActores();
+		//borrarTodoActores();
+		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+			if(entry.getKey().contains(idmodificar)){
+				System.out.println("a");
+				return true;
+			}
+		}
+		escribirtodosActores(ver);
+		return false;
+	}
+
+	@Override
+	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
