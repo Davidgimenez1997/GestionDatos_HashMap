@@ -162,12 +162,12 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
-		borrarTodoActores();
+		//borrarTodoActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 			if(entry.getKey().contains(idmodificar)){
 				entry.setValue(modificar);
 				escribirtodosActores(ver);
-				return true;
+				//return true;
 			}
 		}
 		return false;
@@ -175,7 +175,15 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-		// TODO Auto-generated method stub
+		HashMap<String, Representante> ver = leertodosRepresentante();
+		//borrarTodoRepresentantes();
+		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+			if (entry.getKey().contains(idmodificar)) {
+				entry.setValue(modificar);
+				escribirtodosRepresentante(ver);
+				//return true;
+			}
+		}
 		return false;
 	}
 

@@ -286,7 +286,7 @@ public class Test {
 					String nuevonombrerepre = teclado.nextLine();
 					System.out.println("Escriba la nueva edad");
 					String nuevaedad = teclado.nextLine();
-					Representante reprmodificar = new Representante(nuevonombrerepre, nuevaedad);
+					Representante reprmodificar = new Representante(modificar,nuevonombrerepre, nuevaedad);
 					if(control.ModificarUnRepresentante(modificar, reprmodificar)){
 						System.out.println("Representante modificado correctamente de "+tipo);
 					}else{
