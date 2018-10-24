@@ -274,7 +274,7 @@ public class Test {
 					System.out.println("Escriba el nuevo id del representante");
 					String nuevorepre = teclado.nextLine();
 					Representante obj = new Representante(nuevorepre);
-					Actor actmodificar = new Actor(nuevonombre, nuevadescr, nuevopelo, nuevoojos,obj);
+					Actor actmodificar = new Actor(modificar,nuevonombre, nuevadescr, nuevopelo, nuevoojos,obj);
 					if(control.ModificarUnActor(modificar, actmodificar)){
 						System.out.println("Actor modificado correctamente de "+tipo);
 					}else{

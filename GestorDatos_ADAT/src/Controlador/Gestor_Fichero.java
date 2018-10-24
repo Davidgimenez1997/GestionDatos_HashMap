@@ -162,14 +162,14 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
-		//borrarTodoActores();
+		borrarTodoActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 			if(entry.getKey().contains(idmodificar)){
-				System.out.println("a");
+				entry.setValue(modificar);
+				escribirtodosActores(ver);
 				return true;
 			}
 		}
-		escribirtodosActores(ver);
 		return false;
 	}
 
