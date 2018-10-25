@@ -227,17 +227,16 @@ public class Gestor_Fichero implements I_GestorDatos {
 				fin = true;
 			}
 		}
-		if (fin) {
+		escribirtodosActores(ver_actores);
+		if (ver_representantes.containsKey(Id)) {
+			ver_representantes.remove(Id);
+			escribirtodosRepresentante(ver_representantes);
 			escribirtodosActores(ver_actores);
-			if (ver_representantes.containsKey(Id)) {
-				ver_representantes.remove(Id);
-				escribirtodosRepresentante(ver_representantes);
-				escribirtodosActores(ver_actores);
-				fin = true;
-			} else {
-				fin = false;
-			}
+			fin = true;
+		} else {
+			fin = false;
 		}
+
 		return fin;
 	}
 
