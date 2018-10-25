@@ -146,13 +146,13 @@ public class Controlador {
 	}
 
 	public boolean borrarActores() throws IOException {
-		if(primario.borrarTodoActores()){
+		if (primario.borrarTodoActores()) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean ModificarUnActor(String modificar, Actor actmodificar) throws IOException {
+	public boolean modificarUnActor(String modificar, Actor actmodificar) throws IOException {
 		if (primario.modificarUnActor(modificar, actmodificar)) {
 			return true;
 		}
@@ -160,8 +160,22 @@ public class Controlador {
 
 	}
 
-	public boolean ModificarUnRepresentante(String modificar, Representante reprmodificar) throws IOException {
+	public boolean modificarUnRepresentante(String modificar, Representante reprmodificar) throws IOException {
 		if (primario.modificarUnRepresentante(modificar, reprmodificar)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean borrarUnActores(String idborrar) throws IOException {
+		if (primario.borrarUnActor(idborrar)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean borrarUnRepresentantes(String idborrar) throws IOException {
+		if (primario.borrarUnRepresentante(idborrar)) {
 			return true;
 		}
 		return false;

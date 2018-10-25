@@ -31,4 +31,8 @@ public interface I_GestorDatos {
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException;
 
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException;
+
+	public boolean borrarUnActor(String Id) throws IOException;
+
+	public boolean borrarUnRepresentante(String Id) throws IOException;
 }

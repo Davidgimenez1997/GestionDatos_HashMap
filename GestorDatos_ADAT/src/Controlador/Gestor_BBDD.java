@@ -290,4 +290,16 @@ public class Gestor_BBDD implements I_GestorDatos {
 		return fin;
 	}
 
+	@Override
+	public boolean borrarUnActor(String Id) throws IOException {
+		
+		return false;
+	}
+
+	@Override
+	public boolean borrarUnRepresentante(String Id) throws IOException {
+		
+		return false;
+	}
+
 }

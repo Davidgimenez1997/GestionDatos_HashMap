@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Modelo.Actor;
@@ -189,6 +190,54 @@ public class Gestor_Fichero implements I_GestorDatos {
 		if (fin) {
 			escribirtodosRepresentante(ver_repre);
 			escribirtodosActores(ver_actor);
+		}
+		return fin;
+	}
+
+	@Override
+	public boolean borrarUnActor(String Id) throws IOException {
+		HashMap<String, Actor> ver = leertodosActores();
+		boolean fin = false;
+		if (ver.containsKey(Id)) {
+			ver.remove(Id);
+			escribirtodosActores(ver);
+			fin = true;
+		} else {
+			fin = false;
+		}
+		return fin;
+	}
+
+	@Override
+	public boolean borrarUnRepresentante(String Id) throws IOException {
+		HashMap<String, Representante> ver_representantes = leertodosRepresentante();
+		HashMap<String, Actor> ver_actores = leertodosActores();
+		boolean fin = false;
+		Actor act = new Actor();
+		Representante nuevo = new Representante("NULL");
+		for (HashMap.Entry<String, Actor> entry : ver_actores.entrySet()) {
+			if (entry.getKey().contains(Id)) {
+				System.out.println("Entro");
+				act.setId(entry.getValue().getId());
+				act.setNombre(entry.getValue().getNombre());
+				act.setDescripcion(entry.getValue().getDescripcion());
+				act.setOjos(entry.getValue().getOjos());
+				act.setPelo(entry.getValue().getPelo());
+				act.setRepresentante(nuevo);
+				entry.setValue(act);
+				fin = true;
+			}
+		}
+		if (fin) {
+			escribirtodosActores(ver_actores);
+			if (ver_representantes.containsKey(Id)) {
+				ver_representantes.remove(Id);
+				escribirtodosRepresentante(ver_representantes);
+				escribirtodosActores(ver_actores);
+				fin = true;
+			} else {
+				fin = false;
+			}
 		}
 		return fin;
 	}

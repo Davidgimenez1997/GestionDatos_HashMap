@@ -47,7 +47,8 @@ public class Test {
 			System.out.println("4.Exportar datos a");
 			System.out.println("5.Borrar todos de");
 			System.out.println("6.Modificar uno de");
-			System.out.println("7.Salir");
+			System.out.println("7.Borrar uno de");
+			System.out.println("8.Salir");
 			opcion = teclado.nextInt();
 			switch (opcion) {
 			case 1:
@@ -288,7 +289,7 @@ public class Test {
 					String nuevorepre = teclado.nextLine();
 					Representante obj = new Representante(nuevorepre);
 					Actor actmodificar = new Actor(modificar, nuevonombre, nuevadescr, nuevopelo, nuevoojos, obj);
-					if (control.ModificarUnActor(modificar, actmodificar)) {
+					if (control.modificarUnActor(modificar, actmodificar)) {
 						System.out.println("Actor modificado correctamente de " + primario);
 					} else {
 						System.out.println("No se pudo modificar el actor de " + primario);
@@ -300,7 +301,7 @@ public class Test {
 					System.out.println("Escriba la nueva edad");
 					String nuevaedad = teclado.nextLine();
 					Representante reprmodificar = new Representante(modificar, nuevonombrerepre, nuevaedad);
-					if (control.ModificarUnRepresentante(modificar, reprmodificar)) {
+					if (control.modificarUnRepresentante(modificar, reprmodificar)) {
 						System.out.println("Representante modificado correctamente de " + primario);
 					} else {
 						System.out.println("No se pudo modificar el representante de " + primario);
@@ -309,10 +310,53 @@ public class Test {
 				}
 				break;
 			case 7:
+				teclado.nextLine();
+				System.out.println("¿De donde quieres borrar uno?");
+				System.out.println("1.Actores");
+				System.out.println("2.Representantes");
+				int borraruno = teclado.nextInt();
+				switch (borraruno) {
+				case 1:
+					System.out.println("Id de los actores escoja uno:");
+					control.leerActoresId();
+					break;
+				case 2:
+					System.out.println("Id de los representantes escoja uno:");
+					control.leerRepresentantesId();
+					break;
+				default:
+					System.out.println("Opcion no valida");
+					break;
+				}
+				teclado.nextLine();
+				System.out.println("Escribe el id del dato que quieres eliminar");
+				String idborrar = teclado.nextLine();
+				switch (borraruno) {
+				case 1:
+					if(control.borrarUnActores(idborrar)){
+						System.out.println("Datos borrados de " + primario);
+					}else{
+						System.out.println("Datos no borrados de " + primario);
+					}
+					break;
+				case 2:
+					if(control.borrarUnRepresentantes(idborrar)){
+						System.out.println("Datos borrados de " + primario);
+					}else{
+						System.out.println("Datos no borrados de " + primario);
+					}
+					
+					break;
+				default:
+					System.out.println("Opcion no valida");
+					break;
+				}
+				break;
+			case 8:
 				salir = false;
 				break;
 			default:
-				System.out.println("Ingrese un numero del 1 al 7");
+				System.out.println("Ingrese un numero del 1 al 8");
 				break;
 			}
 		}
