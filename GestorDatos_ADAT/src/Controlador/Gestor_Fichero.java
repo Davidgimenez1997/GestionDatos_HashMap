@@ -216,8 +216,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 		Actor act = new Actor();
 		Representante nuevo = new Representante("NULL");
 		for (HashMap.Entry<String, Actor> entry : ver_actores.entrySet()) {
-			if (entry.getKey().contains(Id)) {
-				System.out.println("Entro");
+			if (entry.getValue().getRepresentante().getId().contains(Id)) {
 				act.setId(entry.getValue().getId());
 				act.setNombre(entry.getValue().getNombre());
 				act.setDescripcion(entry.getValue().getDescripcion());
