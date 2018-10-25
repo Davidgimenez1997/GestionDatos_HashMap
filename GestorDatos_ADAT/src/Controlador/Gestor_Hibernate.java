@@ -12,7 +12,7 @@ import org.hibernate.cfg.Configuration;
 import Modelo.Actor;
 import Modelo.Representante;
 
-public class Gestor_Hibernate implements Interfaz_Controlador {
+public class Gestor_Hibernate implements I_GestorDatos {
 
 	private SessionFactory sessionFactory;
 	private Session s;
@@ -125,24 +125,24 @@ public class Gestor_Hibernate implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int borrarTodoActores() throws IOException {
+	public boolean borrarTodoActores() throws IOException {
 		s.beginTransaction();
 		String stringQuery = "DELETE FROM Actor";
 		Query query = s.createQuery(stringQuery);
 		query.executeUpdate();
 		s.getTransaction().commit();
-		return 0;
+		return true;
 	}
 
 	@Override
-	public int borrarTodoRepresentantes() throws IOException {
+	public boolean borrarTodoRepresentantes() throws IOException {
 		borrarTodoActores();
 		s.beginTransaction();
 		String stringQuery = "DELETE FROM Representante";
 		Query query = s.createQuery(stringQuery);
 		query.executeUpdate();
 		s.getTransaction().commit();
-		return 0;
+		return true;
 	}
 
 	@Override

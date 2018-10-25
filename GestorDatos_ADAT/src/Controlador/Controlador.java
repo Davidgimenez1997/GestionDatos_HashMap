@@ -8,14 +8,14 @@ import Modelo.Actor;
 import Modelo.Representante;
 
 public class Controlador {
-	private static Interfaz_Controlador primario;
-	private static Interfaz_Controlador secundario;
+	private static I_GestorDatos primario;
+	private static I_GestorDatos secundario;
 
 	public void elegirdato(int acceso) throws FileNotFoundException, IOException {
 		if (acceso == 1) {
 			primario = new Gestor_Fichero();
 		} else if (acceso == 2) {
-			primario = new Gestor_BBDD("src/Configuracion.ini");
+			primario = new Gestor_BBDD("Ficheros/Configuracion.ini");
 		} else if (acceso == 3) {
 			primario = new Gestor_Hibernate();
 		}
@@ -138,16 +138,22 @@ public class Controlador {
 		}
 	}
 
-	public void borrarRepresentantes() throws IOException {
-		primario.borrarTodoRepresentantes();
+	public boolean borrarRepresentantes() throws IOException {
+		if (primario.borrarTodoRepresentantes()) {
+			return true;
+		}
+		return false;
 	}
 
-	public void borrarActores() throws IOException {
-		primario.borrarTodoActores();
+	public boolean borrarActores() throws IOException {
+		if(primario.borrarTodoActores()){
+			return true;
+		}
+		return false;
 	}
 
 	public boolean ModificarUnActor(String modificar, Actor actmodificar) throws IOException {
-		if(primario.modificarUnActor(modificar, actmodificar)){
+		if (primario.modificarUnActor(modificar, actmodificar)) {
 			return true;
 		}
 		return false;
@@ -155,7 +161,7 @@ public class Controlador {
 	}
 
 	public boolean ModificarUnRepresentante(String modificar, Representante reprmodificar) throws IOException {
-		if(primario.modificarUnRepresentante(modificar, reprmodificar)){
+		if (primario.modificarUnRepresentante(modificar, reprmodificar)) {
 			return true;
 		}
 		return false;

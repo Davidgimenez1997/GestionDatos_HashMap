@@ -6,7 +6,7 @@ import java.util.HashMap;
 import Modelo.Actor;
 import Modelo.Representante;
 
-public interface Interfaz_Controlador {
+public interface I_GestorDatos {
 
 	public HashMap<String, Actor> leertodosActores() throws IOException;
 
@@ -24,9 +24,9 @@ public interface Interfaz_Controlador {
 
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException;
 
-	public int borrarTodoActores() throws IOException;
+	public boolean borrarTodoActores() throws IOException;
 
-	public int borrarTodoRepresentantes() throws IOException;
+	public boolean borrarTodoRepresentantes() throws IOException;
 
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException;
 

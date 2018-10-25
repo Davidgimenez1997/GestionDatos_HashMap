@@ -10,14 +10,14 @@ import java.util.HashMap;
 import Modelo.Actor;
 import Modelo.Representante;
 
-public class Gestor_Fichero implements Interfaz_Controlador {
+public class Gestor_Fichero implements I_GestorDatos {
 
 	@Override
 	public HashMap<String, Actor> leertodosActores() throws IOException {
 		HashMap<String, Actor> actores = new HashMap<>();
 		HashMap<String, Representante> representantes = leertodosRepresentante();
 		String cadena;
-		FileReader f = new FileReader("src/actores.txt");
+		FileReader f = new FileReader("Ficheros/actores.txt");
 		BufferedReader b = new BufferedReader(f);
 		Actor act;
 		while ((cadena = b.readLine()) != null) {
@@ -40,7 +40,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public HashMap<String, Representante> leertodosRepresentante() throws IOException {
 		HashMap<String, Representante> representantes = new HashMap<>();
-		FileReader f = new FileReader("src/representantes.txt");
+		FileReader f = new FileReader("Ficheros/representantes.txt");
 		BufferedReader b = new BufferedReader(f);
 		String cadena;
 		Representante repre;
@@ -73,7 +73,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public boolean agregarActor(Actor nuevo) throws IOException {
 		if (!comprobaridactor(nuevo)) {
-			FileWriter fw = new FileWriter("src/actores.txt", true);
+			FileWriter fw = new FileWriter("Ficheros/actores.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(nuevo.getId());
 			bw.write(":");
@@ -110,7 +110,7 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public boolean agregarRepresentante(Representante nuevo) throws IOException {
 		if (!comprobaridrepresentante(nuevo)) {
-			FileWriter fw = new FileWriter("src/representantes.txt", true);
+			FileWriter fw = new FileWriter("Ficheros/representantes.txt", true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(nuevo.getId());
 			bw.write(":");
@@ -143,20 +143,20 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int borrarTodoActores() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new FileWriter("src/actores.txt"));
+	public boolean borrarTodoActores() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Ficheros/actores.txt"));
 		bw.write("");
 		bw.close();
-		return 0;
+		return true;
 	}
 
 	@Override
-	public int borrarTodoRepresentantes() throws IOException {
+	public boolean borrarTodoRepresentantes() throws IOException {
 		borrarTodoActores();
-		BufferedWriter bw = new BufferedWriter(new FileWriter("src/representantes.txt"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Ficheros/representantes.txt"));
 		bw.write("");
 		bw.close();
-		return 0;
+		return true;
 	}
 
 	@Override
@@ -171,9 +171,8 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		}
 		if (fin) {
 			escribirtodosActores(ver);
-			return true;
 		}
-		return false;
+		return fin;
 	}
 
 	@Override
@@ -190,9 +189,8 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 		if (fin) {
 			escribirtodosRepresentante(ver_repre);
 			escribirtodosActores(ver_actor);
-			return true;
 		}
-		return false;
+		return fin;
 	}
 
 }

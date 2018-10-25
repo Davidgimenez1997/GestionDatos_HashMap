@@ -13,7 +13,7 @@ public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Controlador control = new Controlador();
 		Scanner teclado = new Scanner(System.in);
-		String tipo = "";
+		String primario = "";
 		System.out.println("1¿Que acceso a datos primario quieres utilizar?");
 		System.out.println("1.Fichero");
 		System.out.println("2.Base de datos");
@@ -21,15 +21,15 @@ public class Test {
 		int acceso = teclado.nextInt();
 		switch (acceso) {
 		case 1:
-			tipo = "fichero";
+			primario = "fichero";
 			control.elegirdato(acceso);
 			break;
 		case 2:
-			tipo = "base de datos";
+			primario = "base de datos";
 			control.elegirdato(acceso);
 			break;
 		case 3:
-			tipo = "hibernate";
+			primario = "hibernate";
 			control.elegirdato(acceso);
 			break;
 		default:
@@ -39,7 +39,7 @@ public class Test {
 		boolean salir = true;
 		int opcion;
 		while (salir) {
-			System.out.println("Estas trabajando con " + tipo + ".");
+			System.out.println("Estas trabajando con " + primario + ".");
 			System.out.println("¿Que quieres hacer?");
 			System.out.println("1.Leer");
 			System.out.println("2.Agregar uno a");
@@ -95,14 +95,14 @@ public class Test {
 					if (obj_repre != null) {
 						Actor nuevo = new Actor(id, nombre, desc, pelo, ojos, obj_repre);
 						if (control.pedirdatosagregarActor(nuevo)) {
-							System.out.println("Actor añadido correctamente a " + tipo);
+							System.out.println("Actor añadido correctamente a " + primario);
 						} else {
-							System.out.println("No se a podido añadir el actor a " + tipo);
+							System.out.println("No se a podido añadir el actor a " + primario);
 						}
 						break;
 					} else {
 						System.out.println(
-								"No se a podido agregar el actor, el representante no a sido encontrado en la tabla representantes");
+								"No se a podido agregar el actor, el representante no a sido encontrado");
 					}
 					break;
 				case 2:
@@ -117,9 +117,9 @@ public class Test {
 					String edadrepresentante = teclado.nextLine();
 					Representante repres = new Representante(idrepresentante, nombrerepresentante, edadrepresentante);
 					if (control.pedirdatosagregarRepresentante(repres)) {
-						System.out.println("Representante añadido correctamente a " + tipo);
+						System.out.println("Representante añadido correctamente a " + primario);
 					} else {
-						System.out.println("No se a podido añadir el representante a " + tipo);
+						System.out.println("No se a podido añadir el representante a " + primario);
 					}
 					break;
 				default:
@@ -213,8 +213,11 @@ public class Test {
 				int borrartodo = teclado.nextInt();
 				switch (borrartodo) {
 				case 1:
-					control.borrarActores();
-					System.out.println("Actores borrados de " + tipo);
+					if(control.borrarActores()){
+					System.out.println("Actores borrados de " + primario);
+					}else{
+						System.out.println("Actores no borrados de " + primario);
+					}
 					break;
 				case 2:
 					teclado.nextLine();
@@ -222,8 +225,11 @@ public class Test {
 					String seguro = teclado.nextLine();
 					switch (seguro.toLowerCase()) {
 					case "s":
-						control.borrarRepresentantes();
-						System.out.println("Actores y representantes borrados de " + tipo);
+						if(control.borrarRepresentantes()){
+						System.out.println("Actores y representantes borrados de " + primario);
+						}else{
+							System.out.println("Actores y representantes no borrados de " + primario);
+						}
 						break;
 					case "n":
 						System.out.println("Cancelado el borrado de Actores y representantes");
@@ -283,9 +289,9 @@ public class Test {
 					Representante obj = new Representante(nuevorepre);
 					Actor actmodificar = new Actor(modificar, nuevonombre, nuevadescr, nuevopelo, nuevoojos, obj);
 					if (control.ModificarUnActor(modificar, actmodificar)) {
-						System.out.println("Actor modificado correctamente de " + tipo);
+						System.out.println("Actor modificado correctamente de " + primario);
 					} else {
-						System.out.println("No se pudo modificar el actor de " + tipo);
+						System.out.println("No se pudo modificar el actor de " + primario);
 					}
 					break;
 				case 2:
@@ -295,9 +301,9 @@ public class Test {
 					String nuevaedad = teclado.nextLine();
 					Representante reprmodificar = new Representante(modificar, nuevonombrerepre, nuevaedad);
 					if (control.ModificarUnRepresentante(modificar, reprmodificar)) {
-						System.out.println("Representante modificado correctamente de " + tipo);
+						System.out.println("Representante modificado correctamente de " + primario);
 					} else {
-						System.out.println("No se pudo modificar el representante de " + tipo);
+						System.out.println("No se pudo modificar el representante de " + primario);
 					}
 					break;
 				}

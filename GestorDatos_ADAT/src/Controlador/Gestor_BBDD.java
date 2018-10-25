@@ -14,7 +14,7 @@ import java.util.Properties;
 import Modelo.Actor;
 import Modelo.Representante;
 
-public class Gestor_BBDD implements Interfaz_Controlador {
+public class Gestor_BBDD implements I_GestorDatos {
 
 	private Connection conexion;
 
@@ -125,7 +125,6 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 
 	@Override
 	public boolean agregarActor(Actor nuevo) throws IOException {
-		int r = 0;
 		try {
 			if (!comprobaridactor(nuevo)) {
 				try {
@@ -137,7 +136,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 					sql.setString(4, nuevo.getPelo());
 					sql.setString(5, nuevo.getOjos());
 					sql.setString(6, nuevo.getRepresentante().getId());
-					r = sql.executeUpdate();
+					sql.executeUpdate();
 					return true;
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -175,7 +174,6 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 
 	@Override
 	public boolean agregarRepresentante(Representante nuevo) throws IOException {
-		int r = 0;
 		try {
 			if (!comprobaridrepresentante(nuevo)) {
 				try {
@@ -184,7 +182,7 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 					sql.setString(1, nuevo.getId());
 					sql.setString(2, nuevo.getNombre());
 					sql.setString(3, nuevo.getEdad());
-					r = sql.executeUpdate();
+					sql.executeUpdate();
 					return true;
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -213,44 +211,84 @@ public class Gestor_BBDD implements Interfaz_Controlador {
 	}
 
 	@Override
-	public int borrarTodoActores() throws IOException {
+	public boolean borrarTodoActores() throws IOException {
 		PreparedStatement pstm;
-		int r = 0;
 		try {
 			pstm = conexion.prepareStatement("Delete from actores");
-			r = pstm.executeUpdate();
+			pstm.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return r;
+		return false;
 	}
 
 	@Override
-	public int borrarTodoRepresentantes() throws IOException {
+	public boolean borrarTodoRepresentantes() throws IOException {
 		borrarTodoActores();
 		PreparedStatement pstm;
-		int r = 0;
+		// int r = 0;
 		try {
 			pstm = conexion.prepareStatement("Delete from representantes");
-			r = pstm.executeUpdate();
+			pstm.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return r;
+		return false;
 	}
 
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		HashMap<String, Actor> ver = leertodosActores();
+		PreparedStatement pstm;
+		boolean fin = false;
+		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+			if (entry.getKey().contains(idmodificar)) {
+				try {
+					pstm = conexion.prepareStatement("UPDATE actores SET " + "Nombre = ?" + ",Descripcion = ?"
+							+ ",Pelo = ?" + ",Ojos = ? " + ",Representante = ? " + "WHERE Id=?");
+					pstm.setString(1, modificar.getNombre());
+					pstm.setString(2, modificar.getDescripcion());
+					pstm.setString(3, modificar.getPelo());
+					pstm.setString(4, modificar.getOjos());
+					pstm.setString(5, modificar.getRepresentante().getId());
+					pstm.setString(6, idmodificar);
+					pstm.executeUpdate();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
+				fin = true;
+			}
+		}
+		return fin;
 	}
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement pstm;
+		HashMap<String, Representante> ver_repre = leertodosRepresentante();
+		HashMap<String, Actor> ver_actor = leertodosActores();
+		boolean fin = false;
+		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
+			if (entry.getKey().contains(idmodificar)) {
+				try {
+					pstm = conexion.prepareStatement("UPDATE representantes SET " + "Nombre = ?" + ",Edad = ?" + "WHERE Id=?");
+					pstm.setString(1, modificar.getNombre());
+					pstm.setString(2, modificar.getEdad());
+					pstm.setString(3, idmodificar);
+					pstm.executeUpdate();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
+				fin = true;
+			}
+		}
+		return fin;
 	}
 
 }

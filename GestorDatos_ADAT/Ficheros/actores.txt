@@ -1,4 +1,4 @@
-1:Johnny:Actor:Negro:Rojo:2
+1:Johnny:Actor:Rojo:Verde:2
 *
 2:Kaya:Actriz:Café oscuro:Azul:1
 *
