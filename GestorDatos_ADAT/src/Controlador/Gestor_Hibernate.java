@@ -178,14 +178,51 @@ public class Gestor_Hibernate implements I_GestorDatos {
 
 	@Override
 	public boolean borrarUnActor(String Id) throws IOException {
-		
-		return false;
+		boolean fin = false;
+		Actor obj = new Actor();
+		HashMap<String, Actor> ver = leertodosActores();
+		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+			if(entry.getValue().getId().equals(Id)){
+				System.out.println("ENTRO");
+				obj = entry.getValue();
+				s.beginTransaction();
+				s.delete(obj);
+				s.getTransaction().commit();
+				fin = true;
+			}
+		}
+		return fin;
 	}
 
 	@Override
 	public boolean borrarUnRepresentante(String Id) throws IOException {
-		
-		return false;
+		boolean fin = false;
+		Actor obj = new Actor();
+		HashMap<String, Actor> ver = leertodosActores();
+		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+			if(entry.getValue().getRepresentante().getId().equals(Id)){
+				System.out.println("ENTRO");
+				obj = entry.getValue();
+				obj.setRepresentante(null);
+				s.beginTransaction();
+				s.update(obj);
+				//s.getTransaction().commit();
+				//fin = true;
+			}
+		}
+		Representante obj2 = new Representante();
+		HashMap<String, Representante> ver2 = leertodosRepresentante();
+		for (HashMap.Entry<String, Representante> entry : ver2.entrySet()) {
+			if(entry.getValue().getId().equals(Id)){
+				System.out.println("ENTRO");
+				obj2 = entry.getValue();
+				//s.beginTransaction();
+				s.delete(obj2);
+				s.getTransaction().commit();
+				fin = true;
+			}
+		}
+		return fin;
 	}
 
 }
