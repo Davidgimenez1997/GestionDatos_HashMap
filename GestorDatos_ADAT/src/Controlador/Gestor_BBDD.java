@@ -271,7 +271,6 @@ public class Gestor_BBDD implements I_GestorDatos {
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
 		PreparedStatement pstm;
 		HashMap<String, Representante> ver_repre = leertodosRepresentante();
-		HashMap<String, Actor> ver_actor = leertodosActores();
 		boolean fin = false;
 		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {

@@ -147,14 +147,33 @@ public class Gestor_Hibernate implements I_GestorDatos {
 
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean fin = false;
+		s.beginTransaction();
+		Actor obj = (Actor) s.get(Actor.class, idmodificar);
+		obj.setId(idmodificar);
+		obj.setNombre(modificar.getNombre());
+		obj.setDescripcion(modificar.getDescripcion());
+		obj.setPelo(modificar.getPelo());
+		obj.setOjos(modificar.getOjos());
+		obj.setRepresentante(modificar.getRepresentante());
+		s.update(obj);
+		fin = true;
+		s.getTransaction().commit();
+		return fin;
 	}
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean fin = false;
+		s.beginTransaction();
+		Representante obj = (Representante) s.get(Representante.class, idmodificar);
+		obj.setId(idmodificar);
+		obj.setNombre(modificar.getNombre());
+		obj.setEdad(modificar.getEdad());
+		s.update(obj);
+		fin = true;
+		s.getTransaction().commit();
+		return fin;
 	}
 
 }
