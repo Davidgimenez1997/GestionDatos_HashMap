@@ -292,14 +292,38 @@ public class Gestor_BBDD implements I_GestorDatos {
 
 	@Override
 	public boolean borrarUnActor(String Id) throws IOException {
-		
-		return false;
+		boolean fin = false;
+		PreparedStatement pstm;
+		try {
+			String query = "Delete from actores Where Id = " + Id;
+			pstm = conexion.prepareStatement(query);
+			pstm.executeUpdate();
+			fin = true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return fin;
+
 	}
 
 	@Override
 	public boolean borrarUnRepresentante(String Id) throws IOException {
-		
-		return false;
+		boolean fin = false;
+		PreparedStatement pstm;
+		try {
+			String query = "UPDATE actores SET " + "Representante = NULL " + "WHERE Representante = " + Id;
+			String query2 = "Delete from representantes Where Id = " + Id;
+			pstm = conexion.prepareStatement(query);
+			pstm.executeUpdate();
+			pstm = conexion.prepareStatement(query2);
+			pstm.executeUpdate();
+			fin = true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return fin;
 	}
 
 }
