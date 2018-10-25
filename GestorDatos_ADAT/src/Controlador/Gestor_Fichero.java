@@ -162,27 +162,35 @@ public class Gestor_Fichero implements Interfaz_Controlador {
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
-		//borrarTodoActores();
+		boolean fin = false;
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
-			if(entry.getKey().contains(idmodificar)){
+			if (entry.getKey().contains(idmodificar)) {
 				entry.setValue(modificar);
-				escribirtodosActores(ver);
-				//return true;
+				fin = true;
 			}
+		}
+		if (fin) {
+			escribirtodosActores(ver);
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-		HashMap<String, Representante> ver = leertodosRepresentante();
-		//borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+		HashMap<String, Representante> ver_repre = leertodosRepresentante();
+		HashMap<String, Actor> ver_actor = leertodosActores();
+		boolean fin = false;
+		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {
 				entry.setValue(modificar);
-				escribirtodosRepresentante(ver);
-				//return true;
+				fin = true;
 			}
+		}
+		if (fin) {
+			escribirtodosRepresentante(ver_repre);
+			escribirtodosActores(ver_actor);
+			return true;
 		}
 		return false;
 	}
