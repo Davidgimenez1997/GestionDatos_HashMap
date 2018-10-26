@@ -181,7 +181,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 		HashMap<String, Actor> ver_actor = leertodosActores();
 		boolean fin = false;
 		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
-			if (entry.getKey().contains(idmodificar)) {
+			if (entry.getKey().equals(idmodificar)) {
 				entry.setValue(modificar);
 				fin = true;
 			}
@@ -215,7 +215,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 		Actor act = new Actor();
 		Representante nuevo = new Representante("NULL");
 		for (HashMap.Entry<String, Actor> entry : ver_actores.entrySet()) {
-			if (entry.getValue().getRepresentante().getId().contains(Id)) {
+			if (entry.getValue().getRepresentante().getId().equals(Id)) {
 				act.setId(entry.getValue().getId());
 				act.setNombre(entry.getValue().getNombre());
 				act.setDescripcion(entry.getValue().getDescripcion());
@@ -223,10 +223,10 @@ public class Gestor_Fichero implements I_GestorDatos {
 				act.setPelo(entry.getValue().getPelo());
 				act.setRepresentante(nuevo);
 				entry.setValue(act);
-				fin = true;
+				//fin = true;
 			}
 		}
-		escribirtodosActores(ver_actores);
+		//escribirtodosActores(ver_actores);
 		if (ver_representantes.containsKey(Id)) {
 			ver_representantes.remove(Id);
 			escribirtodosRepresentante(ver_representantes);
