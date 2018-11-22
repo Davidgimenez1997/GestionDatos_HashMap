@@ -11,13 +11,16 @@ public class Controlador {
 	private static I_GestorDatos primario;
 	private static I_GestorDatos secundario;
 
+
 	public void elegirdato(int acceso) throws FileNotFoundException, IOException {
 		if (acceso == 1) {
 			primario = new Gestor_Fichero();
 		} else if (acceso == 2) {
-			primario = new Gestor_BBDD("Ficheros/Configuracion.ini");
+			primario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
 		} else if (acceso == 3) {
 			primario = new Gestor_Hibernate();
+		} else if(acceso == 4){
+			primario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
 		}
 	}
 
