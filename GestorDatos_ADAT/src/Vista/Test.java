@@ -107,8 +107,7 @@ public class Test {
 						}
 						break;
 					} else {
-						System.out.println(
-								"No se a podido agregar el actor, el representante no a sido encontrado");
+						System.out.println("No se a podido agregar el actor, el representante no a sido encontrado");
 					}
 					break;
 				case 2:
@@ -138,6 +137,7 @@ public class Test {
 				System.out.println("1.Fichero");
 				System.out.println("2.Base de datos");
 				System.out.println("3.Hiberate");
+				System.out.println("4.JSON");
 				int importar = teclado.nextInt();
 				switch (importar) {
 				case 1:
@@ -146,6 +146,8 @@ public class Test {
 					} else if (acceso == 2) {
 						control.importar(importar);
 					} else if (acceso == 3) {
+						control.importar(importar);
+					} else if (acceso == 4) {
 						control.importar(importar);
 					}
 					break;
@@ -156,6 +158,8 @@ public class Test {
 						control.importar(importar);
 					} else if (acceso == 3) {
 						control.importar(importar);
+					} else if (acceso == 4) {
+						control.importar(importar);
 					}
 					break;
 				case 3:
@@ -164,6 +168,19 @@ public class Test {
 					} else if (acceso == 1) {
 						control.importar(importar);
 					} else if (acceso == 2) {
+						control.importar(importar);
+					} else if (acceso == 4) {
+						control.importar(importar);
+					}
+					break;
+				case 4:
+					if (acceso == 4) {
+						System.out.println("No puedes importar de JSON a JSON");
+					} else if (acceso == 1) {
+						control.importar(importar);
+					} else if (acceso == 2) {
+						control.importar(importar);
+					} else if (acceso == 3) {
 						control.importar(importar);
 					}
 					break;
@@ -177,6 +194,7 @@ public class Test {
 				System.out.println("1.Fichero");
 				System.out.println("2.Base de datos");
 				System.out.println("3.Hibernate");
+				System.out.println("4.JSON");
 				int exportar = teclado.nextInt();
 				switch (exportar) {
 				case 1:
@@ -185,6 +203,8 @@ public class Test {
 					} else if (acceso == 2) {
 						control.exportar(exportar);
 					} else if (acceso == 3) {
+						control.exportar(exportar);
+					} else if (acceso == 4) {
 						control.exportar(exportar);
 					}
 					break;
@@ -195,6 +215,8 @@ public class Test {
 						control.exportar(exportar);
 					} else if (acceso == 3) {
 						control.exportar(exportar);
+					} else if (acceso == 4) {
+						control.exportar(exportar);
 					}
 					break;
 				case 3:
@@ -203,6 +225,19 @@ public class Test {
 					} else if (acceso == 1) {
 						control.exportar(exportar);
 					} else if (acceso == 2) {
+						control.exportar(exportar);
+					} else if (acceso == 4) {
+						control.exportar(exportar);
+					}
+					break;
+				case 4:
+					if (acceso == 4) {
+						System.out.println("No puedes exportsr de JSON a JSON");
+					} else if (acceso == 1) {
+						control.exportar(exportar);
+					} else if (acceso == 2) {
+						control.exportar(exportar);
+					} else if (acceso == 3) {
 						control.exportar(exportar);
 					}
 					break;
@@ -219,9 +254,9 @@ public class Test {
 				int borrartodo = teclado.nextInt();
 				switch (borrartodo) {
 				case 1:
-					if(control.borrarActores()){
-					System.out.println("Actores borrados de " + primario);
-					}else{
+					if (control.borrarActores()) {
+						System.out.println("Actores borrados de " + primario);
+					} else {
 						System.out.println("Actores no borrados de " + primario);
 					}
 					break;
@@ -231,9 +266,9 @@ public class Test {
 					String seguro = teclado.nextLine();
 					switch (seguro.toLowerCase()) {
 					case "s":
-						if(control.borrarRepresentantes()){
-						System.out.println("Actores y representantes borrados de " + primario);
-						}else{
+						if (control.borrarRepresentantes()) {
+							System.out.println("Actores y representantes borrados de " + primario);
+						} else {
 							System.out.println("Actores y representantes no borrados de " + primario);
 						}
 						break;
@@ -338,19 +373,19 @@ public class Test {
 				String idborrar = teclado.nextLine();
 				switch (borraruno) {
 				case 1:
-					if(control.borrarUnActores(idborrar)){
+					if (control.borrarUnActores(idborrar)) {
 						System.out.println("Datos borrados de " + primario);
-					}else{
+					} else {
 						System.out.println("Datos no borrados de " + primario);
 					}
 					break;
 				case 2:
-					if(control.borrarUnRepresentantes(idborrar)){
+					if (control.borrarUnRepresentantes(idborrar)) {
 						System.out.println("Datos borrados de " + primario);
-					}else{
+					} else {
 						System.out.println("Datos no borrados de " + primario);
 					}
-					
+
 					break;
 				default:
 					System.out.println("Opcion no valida");
