@@ -244,7 +244,6 @@ public class Gestor_BBDD implements I_GestorDatos {
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
 		PreparedStatement pstm;
-		boolean fin = false;
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {
 				try {
@@ -261,10 +260,10 @@ public class Gestor_BBDD implements I_GestorDatos {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
 				}
-				fin = true;
+				return true;
 			}
 		}
-		return fin;
+		return false;
 	}
 
 	@Override
