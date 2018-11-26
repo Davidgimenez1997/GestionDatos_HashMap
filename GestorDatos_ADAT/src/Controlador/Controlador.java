@@ -104,7 +104,7 @@ public class Controlador {
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
 		} else if (importar == 2) {
-			secundario = new Gestor_BBDD("Ficheros/Configuracion.ini");
+			secundario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
@@ -119,9 +119,8 @@ public class Controlador {
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
-			primario.escribirtodosActores(leer_actores);
 			primario.escribirtodosRepresentante(leer_representante);
-
+			primario.escribirtodosActores(leer_actores);
 		}
 	}
 
@@ -134,7 +133,7 @@ public class Controlador {
 			secundario.escribirtodosActores(leer_actores);
 
 		} else if (exportar == 2) {
-			secundario = new Gestor_BBDD("Ficheros/Configuracion.ini");
+			secundario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
@@ -149,8 +148,8 @@ public class Controlador {
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
-			secundario.escribirtodosActores(leer_actores);
 			secundario.escribirtodosRepresentante(leer_representante);
+			secundario.escribirtodosActores(leer_actores);
 		}
 	}
 
