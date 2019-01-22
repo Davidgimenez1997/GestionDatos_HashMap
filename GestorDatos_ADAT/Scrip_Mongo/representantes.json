@@ -1,0 +1,17 @@
+[
+ {
+	"id":"1",
+	"nombre":"David",
+	"edad":"22"
+ },
+ {
+	"id":"2",
+	"nombre":"Jaime",
+	"edad":"20"
+ },
+ {
+	"id":"3",
+	"nombre":"Gloria",
+	"edad":"18"
+ }
+]

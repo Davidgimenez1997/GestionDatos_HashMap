@@ -28,6 +28,17 @@ public class Actor {
 		this.ojos = ojos;
 		this.representante = representante;
 	}
+	
+	
+
+	public Actor(String id, String nombre, String descripcion, String pelo, String ojos) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.pelo = pelo;
+		this.ojos = ojos;
+	}
 
 	public String getId() {
 		return id;

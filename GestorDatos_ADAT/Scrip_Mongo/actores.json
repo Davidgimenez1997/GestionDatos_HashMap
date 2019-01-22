@@ -1,0 +1,47 @@
+[
+	{
+		"id":"1",
+		"nombre":"Robert",
+		"descripcion":"Actor",
+		"pelo":"calva",
+		"ojos":"verdes",
+		"representante": [
+							{
+								"id":"1",
+								"nombre":"David",
+								"edad":"22"
+							}
+						 ]
+		
+	},
+	{
+		"id":"2",
+		"nombre":"Paco",
+		"descripcion":"Actor",
+		"pelo":"azul",
+		"ojos":"marrones",
+		"representante": [
+							{
+									"id":"2",
+									"nombre":"Jaime",
+									"edad":"20"
+							}
+						 ]
+		
+	},
+	{
+		"id":"3",
+		"nombre":"Javier",
+		"descripcion":"Actor",
+		"pelo":"rojo",
+		"ojos":"negros",
+		"representante": [
+							{
+								"id":"3",
+								"nombre":"Gloria",
+								"edad":"18"
+							}
+						 ]
+		
+	}
+]
