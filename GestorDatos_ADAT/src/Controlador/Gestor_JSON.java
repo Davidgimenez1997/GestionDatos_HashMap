@@ -40,7 +40,7 @@ public class Gestor_JSON implements I_GestorDatos {
 	@Override
 	public HashMap<String, Actor> leertodosActores() throws IOException {
 		HashMap<String, Actor> auxhm = new HashMap<String, Actor>();
-		String url = SERVER_PATH + GET_ACTOR;
+		String url = "http://localhost/David/GestorDatos/leeActor.php";
 		
 		String response = encargadoPeticiones.getRequest(url);
 		JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());

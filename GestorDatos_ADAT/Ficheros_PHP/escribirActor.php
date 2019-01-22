@@ -32,9 +32,16 @@ if(isset($parameters)){
 		$pelo = $repesentante["pelo"];
 		$ojos = $repesentante["ojos"];
 		$idrepresentante = $repesentante["representante"];
+		
+		if($idrepresentante == "null"){
+			$query  = "INSERT INTO  actores (Id,Nombre,Descripcion,Pelo,Ojos,Representante) ";
+			$query .= "VALUES ('$id','$nombre','$descripcion','$pelo','$ojos',null)";
+		}else{
+			$query  = "INSERT INTO  actores (Id,Nombre,Descripcion,Pelo,Ojos,Representante) ";
+			$query .= "VALUES ('$id','$nombre','$descripcion','$pelo','$ojos','$idrepresentante')";
+		}
 
-		$query  = "INSERT INTO  actores (Id,Nombre,Descripcion,Pelo,Ojos,Representante) ";
-		$query .= "VALUES ('$id','$nombre','$descripcion','$pelo','$ojos','$idrepresentante')";
+		
 
 		$result = $conn->query ( $query );
 

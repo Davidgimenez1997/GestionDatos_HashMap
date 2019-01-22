@@ -32,10 +32,13 @@ if(isset($parameters)){
 		$pelo = $repesentante["Pelo"];
 		$ojos = $repesentante["Ojos"];
 		$idrepresentante = $repesentante["Representante"];
-
-
-		$query  = "UPDATE actores SET Nombre = $nombre ,Descripcion = $descripcion, Pelo  =$pelo,Ojos  = $ojos,Representante  = $idrepresentante WHERE Id=$id";
-
+		
+		if($idrepresentante == "null"){
+			$query  = "UPDATE actores SET Nombre = '$nombre' ,Descripcion = '$descripcion', Pelo  ='$pelo',Ojos  = '$ojos',Representante  = null WHERE Id='$id'";
+		}else{
+			$query  = "UPDATE actores SET Nombre = '$nombre' ,Descripcion = '$descripcion', Pelo  ='$pelo',Ojos  = '$ojos',Representante  = '$idrepresentante' WHERE Id='$id'";
+		}
+		
 		$result = $conn->query ( $query );
 
 		if (isset ( $result ) && $result) { // Si pasa por este if, la query está está bien y se ha insertado correctamente
