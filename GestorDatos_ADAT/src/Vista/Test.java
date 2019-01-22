@@ -19,6 +19,7 @@ public class Test {
 		System.out.println("2.Base de datos");
 		System.out.println("3.Hibernate");
 		System.out.println("4.JSON");
+		System.out.println("5.Mongo");
 		int acceso = teclado.nextInt();
 		switch (acceso) {
 		case 1:
@@ -35,6 +36,10 @@ public class Test {
 			break;
 		case 4:
 			primario = "json";
+			control.elegirdato(acceso);
+			break;
+		case 5:
+			primario = "mongo";
 			control.elegirdato(acceso);
 			break;
 		default:

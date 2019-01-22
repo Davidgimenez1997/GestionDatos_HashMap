@@ -21,6 +21,8 @@ public class Controlador {
 			primario = new Gestor_Hibernate();
 		} else if(acceso == 4){
 			primario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
+		} else if(acceso == 5){
+			primario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
 		}
 	}
 
