@@ -69,7 +69,9 @@ Vista:
 Controlador:
 
 ```
-Está desarrollado con una interfaz que gestiona los métodos que interactúan con el usuario. Cada tipo de datos tiene su propia clase que implementa esa interfaz.
+Está desarrollado con una interfaz que gestiona los métodos que interactúan con el usuario.
+Cada tipo de datos tiene su propia clase que implementa esa interfaz.
 
-La clase controlador, se usa para identificar el tipo de dato selecciónado por el cliente y gestionar la interacción del usuario con las clases anteriormente mencionadas.
+La clase controlador, se usa para identificar el tipo de dato selecciónado por el cliente y gestionar 
+la interacción del usuario con las clases anteriormente mencionadas.
 ```
