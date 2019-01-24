@@ -1,12 +1,12 @@
 Este proyecto es un cliente desarrollado en Java que contiene diferentes tipos de accesos de datos. 
 
-Tanto como ficheros, bases de datos relacionales (usando MySQL, Hibernate yJSON) y bases de datos no relacionales (MongoDB) .
+Tanto como ficheros, bases de datos relacionales (usando MySQL, Hibernate y JSON) y bases de datos no relacionales (MongoDB) .
 
 Entorno y condiciones utilizadas:
 
 -Eclipse.
 
--Xampp(PHPMyAdmin).
+-Xampp (PHPMyAdmin).
 
 -MongoDB instalado en local.
 
@@ -24,9 +24,11 @@ Funcionalidad:
 
 Tienes Actores que dentro del actor, contienes un identificador, un nombre, una descripción, un color de ojos, un color de pelo y el identificador de un Representante, esto último puede ser opcional.
 
-Los representantes contienen un identificador, su nombre y su edad.
+Los Representantes contienen un identificador, su nombre y su edad.
 
-El cliente puede leer, agregar, actualizar y borrar(uno o todos), de los actores y los representantes. A su vez también se puede importar datos y exportar datos a los diferentes tipos de datos comentarios anteriormente.
+Los identificadores de ambos son unicos.
+
+El cliente puede leer, agregar, actualizar y borrar (uno o todos), de los actores y los representantes. A su vez también se puede importar datos y exportar datos a los diferentes tipos de datos comentarios anteriormente.
 
 -Carpetas del proyecto:
 
@@ -37,6 +39,7 @@ Contiene los ficheros de configuración de la base de datos MySQL , JSON y Mongo
 Ficheros PHP:
 
 Necesarios para 
+
 Sobre el código:
 
 Esta estructurado en la arquitectura MVC (Modelo,Vista,Controlador).
