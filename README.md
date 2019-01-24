@@ -40,7 +40,9 @@ El cliente puede leer, agregar, actualizar y borrar (uno o todos), de los actore
 Ficheros
 
 ```
-Contiene los ficheros de configuración de la base de datos MySQL , JSON y MongoDB y los ficheros de persistencia de datos de los actores y los representantes.
+Contiene los ficheros de configuración de la base de datos MySQL,
+JSON y MongoDB y los ficheros de
+persistencia de datos de los actores y los representantes.
 ```
 
 Ficheros PHP
