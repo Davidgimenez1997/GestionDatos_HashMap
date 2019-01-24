@@ -1,56 +1,88 @@
-# GestionDatos Usando HashMap
+# Project Title
 
-Este proyecto es un cliente desarrollado en Java que contiene diferentes tipos de accesos de datos. 
+One Paragraph of project description goes here
 
-Tanto como ficheros, bases de datos relacionales (usando MySQL, Hibernate y JSON) y bases de datos no relacionales (MongoDB) .
+## Getting Started
 
-## Entorno y condiciones utilizadas:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-...
--Eclipse.
--Xampp (PHPMyAdmin).
--MongoDB instalado en local.
-...
+### Prerequisites
 
-El proyecto se puede dividir en:
+What things you need to install the software and how to install them
 
--Ficheros de configuración.
+```
+Give examples
+```
 
--Ficheros PHP usados con el tipo de dato JSON.
+### Installing
 
--Scrips de las bases de datos para los diferentes datos tratados.
+A step by step series of examples that tell you how to get a development env running
 
--Librerias utilizadas para el funcionamiento.
+Say what the step will be
 
-Funcionalidad: 
+```
+Give the example
+```
 
-Tienes Actores que dentro del actor, contienes un identificador, un nombre, una descripción, un color de ojos, un color de pelo y el identificador de un Representante, esto último puede ser opcional.
+And repeat
 
-Los Representantes contienen un identificador, su nombre y su edad.
+```
+until finished
+```
 
-Los identificadores de ambos son unicos.
+End with an example of getting some data out of the system or using it for a little demo
 
-El cliente puede leer, agregar, actualizar y borrar (uno o todos), de los actores y los representantes. A su vez también se puede importar datos y exportar datos a los diferentes tipos de datos comentarios anteriormente.
+## Running the tests
 
--Carpetas del proyecto:
+Explain how to run the automated tests for this system
 
--Ficheros:
+### Break down into end to end tests
 
-Contiene los ficheros de configuración de la base de datos MySQL , JSON y MongoDB y los ficheros de persistencia de datos de los actores y los representantes.
+Explain what these tests test and why
 
-Ficheros PHP:
+```
+Give an example
+```
 
-Necesarios para 
+### And coding style tests
 
-Sobre el código:
+Explain what these tests test and why
 
-Esta estructurado en la arquitectura MVC (Modelo,Vista,Controlador).
+```
+Give an example
+```
 
--Modelo:
+## Deployment
 
+Add additional notes about how to deploy this on a live system
 
--Controlador:
+## Built With
 
-Está desarrollado con una interfaz que gestiona los métodos que interactúan con el usuario. Cada tipo de datos tiene su propia clase que implementa esa interfaz.
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-La clase controlador, se usa para identificar el tipo de dato selecciónado por el cliente y gestionar la interacción del usuario con las clases anteriormente mencionadas.
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
+
