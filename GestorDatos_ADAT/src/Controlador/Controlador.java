@@ -123,6 +123,12 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
+		} else if(importar == 5){
+			secundario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
+			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
+			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
+			primario.escribirtodosRepresentante(leer_representante);
+			primario.escribirtodosActores(leer_actores);
 		}
 	}
 
@@ -148,6 +154,12 @@ public class Controlador {
 			secundario.escribirtodosActores(leer_actores);
 		} else if (exportar == 4){
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
+			HashMap<String, Actor> leer_actores = primario.leertodosActores();
+			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
+			secundario.escribirtodosRepresentante(leer_representante);
+			secundario.escribirtodosActores(leer_actores);
+		}else if (exportar == 5){
+			secundario = new Gestor_JSON("Ficheros/ConfiguracionMONGO.ini");
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);

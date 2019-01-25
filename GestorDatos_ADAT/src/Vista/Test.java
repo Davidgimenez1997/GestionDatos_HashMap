@@ -154,6 +154,8 @@ public class Test {
 						control.importar(importar);
 					} else if (acceso == 4) {
 						control.importar(importar);
+					}else if(acceso==5){
+						control.importar(importar);
 					}
 					break;
 				case 2:
@@ -164,6 +166,8 @@ public class Test {
 					} else if (acceso == 3) {
 						control.importar(importar);
 					} else if (acceso == 4) {
+						control.importar(importar);
+					}else if(acceso==5){
 						control.importar(importar);
 					}
 					break;
@@ -176,6 +180,8 @@ public class Test {
 						control.importar(importar);
 					} else if (acceso == 4) {
 						control.importar(importar);
+					}else if(acceso==5){
+						control.importar(importar);
 					}
 					break;
 				case 4:
@@ -187,6 +193,21 @@ public class Test {
 						control.importar(importar);
 					} else if (acceso == 3) {
 						control.importar(importar);
+					}else if(acceso==5){
+						control.importar(importar);
+					}
+					break;
+				case 5:
+					if (acceso == 4) {
+						control.importar(importar);
+					} else if (acceso == 1) {
+						control.importar(importar);
+					} else if (acceso == 2) {
+						control.importar(importar);
+					} else if (acceso == 3) {
+						control.importar(importar);
+					}else if(acceso==5){
+						System.out.println("No puedes importar de Mongo a Mongo");
 					}
 					break;
 				default:
@@ -200,6 +221,7 @@ public class Test {
 				System.out.println("2.Base de datos");
 				System.out.println("3.Hibernate");
 				System.out.println("4.JSON");
+				System.out.println("5.Mongo");
 				int exportar = teclado.nextInt();
 				switch (exportar) {
 				case 1:
@@ -210,6 +232,8 @@ public class Test {
 					} else if (acceso == 3) {
 						control.exportar(exportar);
 					} else if (acceso == 4) {
+						control.exportar(exportar);
+					}else if(acceso==5){
 						control.exportar(exportar);
 					}
 					break;
@@ -222,6 +246,8 @@ public class Test {
 						control.exportar(exportar);
 					} else if (acceso == 4) {
 						control.exportar(exportar);
+					}else if(acceso==5){
+						control.exportar(exportar);
 					}
 					break;
 				case 3:
@@ -232,6 +258,8 @@ public class Test {
 					} else if (acceso == 2) {
 						control.exportar(exportar);
 					} else if (acceso == 4) {
+						control.exportar(exportar);
+					}else if(acceso==5){
 						control.exportar(exportar);
 					}
 					break;
@@ -244,7 +272,21 @@ public class Test {
 						control.exportar(exportar);
 					} else if (acceso == 3) {
 						control.exportar(exportar);
+					}else if(acceso==5){
+						control.exportar(exportar);
 					}
+					break;
+				case 5:
+					if (acceso == 4) {
+						control.exportar(exportar);
+					} else if (acceso == 1) {
+						control.exportar(exportar);
+					} else if (acceso == 2) {
+						control.exportar(exportar);
+					} else if (acceso == 3) {
+						control.exportar(exportar);
+					}else if(acceso==5){
+						System.out.println("No puedes exportsr de Mongo a Mongo");					}
 					break;
 				default:
 					System.out.println("Opcion no valida");
