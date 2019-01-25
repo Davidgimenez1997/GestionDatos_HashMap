@@ -89,26 +89,42 @@ public class Gestor_Mongo implements I_GestorDatos{
 
 	@Override
 	public boolean agregarActor(Actor nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean agregarRepresentante(Representante nuevo) throws IOException {
-		// TODO Auto-generated method stub
+		if(!comprobaridrepresentante(nuevo)){
+			MongoCollection<Document> collection = database.getCollection("representantes");
+			Document document = new Document();
+			document.put("id",nuevo.getId());
+			document.put("nombre", nuevo.getNombre());
+			document.put("edad", nuevo.getEdad());
+			collection.insertOne(document);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean comprobaridactor(Actor nuevo) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		HashMap<String, Actor> aux = new HashMap<String, Actor>();
+		if(aux.get(nuevo.getId())!=null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
 	public boolean comprobaridrepresentante(Representante nuevo) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		HashMap<String, Representante> aux = leertodosRepresentante();
+		if(aux.get(nuevo.getId())!=null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
