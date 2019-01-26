@@ -213,25 +213,9 @@ public class Gestor_Mongo implements I_GestorDatos {
 
 	@Override
 	public boolean borrarUnActor(String Id) throws IOException {
-		MongoCollection<Document> collection = database.getCollection(ACTORES);
-		Actor act;
 		if (leertodosActores().get(Id) != null) {
-			act = leertodosActores().get(Id);
+			MongoCollection<Document> collection = database.getCollection(ACTORES);
 			collection.deleteOne(Filters.eq("id", Id));
-			Document document = new Document();
-			document.put("id", act.getId());
-			document.put("nombre", act.getNombre());
-			document.put("descripcion", act.getDescripcion());
-			document.put("pelo", act.getPelo());
-			document.put("ojos", act.getOjos());
-			JSONObject obj = new JSONObject();
-			obj.put("id", "null");
-			obj.put("nombre", "null");
-			obj.put("edad", "null");
-			JSONArray arr = new JSONArray();
-			arr.add(obj);
-			document.put("representante", arr);
-			collection.deleteOne(document);
 			return true;
 		}
 		return false;
@@ -240,10 +224,29 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public boolean borrarUnRepresentante(String Id) throws IOException {
 		if (leertodosRepresentante().get(Id) != null) {
+			for (HashMap.Entry<String,Actor> entry : leertodosActores().entrySet()) {
+				if(entry.getValue().getRepresentante().getId().equals(Id)){
+					MongoCollection<Document> updateCollection = database.getCollection(ACTORES);
+					Document query = new Document();
+				    query.append("id",entry.getValue().getId());
+				    JSONObject obj = new JSONObject();
+					obj.put("id","null");
+					obj.put("nombre", "null");
+					obj.put("edad","null");
+					JSONArray arr = new JSONArray();
+					arr.add(obj);
+					Document setData = new Document();
+				    setData.append("representante", arr);
+				    Document update = new Document();
+			        update.append("$set", setData);
+			        updateCollection.updateOne(query, update);					
+				}
+			}
 			MongoCollection<Document> collection = database.getCollection(REPRESENTANTES);
 			collection.deleteOne(Filters.eq("id", Id));
 			return true;
 		}
+		
 		return false;
 	}
 }
