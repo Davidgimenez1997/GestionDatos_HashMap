@@ -253,7 +253,7 @@ public class Test {
 			if (control.borrarActores()) {
 				System.out.println("Actores borrados de " + primario);
 			} else {
-				System.out.println("Actores no borrados de " + primario);
+				System.err.println("Actores no borrados de " + primario);
 			}
 			break;
 		case 2:
@@ -265,20 +265,20 @@ public class Test {
 				if (control.borrarRepresentantes()) {
 					System.out.println("Actores y representantes borrados de " + primario);
 				} else {
-					System.out.println("Actores y representantes no borrados de " + primario);
+					System.err.println("Actores y representantes no borrados de " + primario);
 				}
 				break;
 			case "n":
-				System.out.println("Cancelado el borrado de Actores y representantes");
+				System.err.println("Cancelado el borrado de Actores y representantes");
 				break;
 			default:
-				System.out.println("Opcion no valida");
+				System.err.println("Opcion no valida");
 				break;
 			}
 
 			break;
 		default:
-			System.out.println("Opcion no valida");
+			System.err.println("Opcion no valida");
 			break;
 		}
 	}
@@ -294,7 +294,7 @@ public class Test {
 		switch (exportar) {
 		case 1:
 			if (aux == 1) {
-				System.out.println("No puedes exportar de fichero a fichero.");
+				System.err.println("No puedes exportar de fichero a fichero.");
 			} else if (aux == 2) {
 				control.exportar(exportar);
 			} else if (aux == 3) {
@@ -307,7 +307,7 @@ public class Test {
 			break;
 		case 2:
 			if (aux == 2) {
-				System.out.println("No puedes exportar de base de datos a base de datos.");
+				System.err.println("No puedes exportar de base de datos a base de datos.");
 			} else if (aux == 1) {
 				control.exportar(exportar);
 			} else if (aux == 3) {
@@ -320,7 +320,7 @@ public class Test {
 			break;
 		case 3:
 			if (aux == 3) {
-				System.out.println("No puedes exportar de hibernate a hibernate.");
+				System.err.println("No puedes exportar de hibernate a hibernate.");
 			} else if (aux == 1) {
 				control.exportar(exportar);
 			} else if (aux == 2) {
@@ -333,7 +333,7 @@ public class Test {
 			break;
 		case 4:
 			if (aux == 4) {
-				System.out.println("No puedes exportsr de JSON a JSON");
+				System.err.println("No puedes exportsr de JSON a JSON");
 			} else if (aux == 1) {
 				control.exportar(exportar);
 			} else if (aux == 2) {
@@ -354,7 +354,7 @@ public class Test {
 			} else if (aux == 3) {
 				control.exportar(exportar);
 			} else if (aux == 5) {
-				System.out.println("No puedes exportsr de Mongo a Mongo");
+				System.err.println("No puedes exportsr de Mongo a Mongo");
 			}
 			break;
 		default:
@@ -374,7 +374,7 @@ public class Test {
 		switch (importar) {
 		case 1:
 			if (aux == 1) {
-				System.out.println("No puedes importar de fichero a fichero.");
+				System.err.println("No puedes importar de fichero a fichero.");
 			} else if (aux == 2) {
 				control.importar(importar);
 			} else if (aux == 3) {
@@ -387,7 +387,7 @@ public class Test {
 			break;
 		case 2:
 			if (aux == 2) {
-				System.out.println("No puedes importar de base de datos a base de datos.");
+				System.err.println("No puedes importar de base de datos a base de datos.");
 			} else if (aux == 1) {
 				control.importar(importar);
 			} else if (aux == 3) {
@@ -400,7 +400,7 @@ public class Test {
 			break;
 		case 3:
 			if (aux == 3) {
-				System.out.println("No puedes importar de hibernate a hibernate.");
+				System.err.println("No puedes importar de hibernate a hibernate.");
 			} else if (aux == 1) {
 				control.importar(importar);
 			} else if (aux == 2) {
@@ -413,7 +413,7 @@ public class Test {
 			break;
 		case 4:
 			if (aux == 4) {
-				System.out.println("No puedes importar de JSON a JSON");
+				System.err.println("No puedes importar de JSON a JSON");
 			} else if (aux == 1) {
 				control.importar(importar);
 			} else if (aux == 2) {
@@ -434,11 +434,11 @@ public class Test {
 			} else if (aux == 3) {
 				control.importar(importar);
 			} else if (aux == 5) {
-				System.out.println("No puedes importar de Mongo a Mongo");
+				System.err.println("No puedes importar de Mongo a Mongo");
 			}
 			break;
 		default:
-			System.out.println("Opcion no valida");
+			System.err.println("Opcion no valida");
 			break;
 		}
 	}
@@ -473,11 +473,11 @@ public class Test {
 				if (control.pedirdatosagregarActor(nuevo)) {
 					System.out.println("Actor añadido correctamente a " + primario);
 				} else {
-					System.out.println("No se a podido añadir el actor a " + primario);
+					System.err.println("No se a podido añadir el actor a " + primario);
 				}
 				break;
 			} else {
-				System.out.println("No se a podido agregar el actor, el representante no a sido encontrado");
+				System.err.println("No se a podido agregar el actor, el representante no a sido encontrado");
 			}
 			break;
 		case 2:
@@ -494,11 +494,11 @@ public class Test {
 			if (control.pedirdatosagregarRepresentante(repres)) {
 				System.out.println("Representante añadido correctamente a " + primario);
 			} else {
-				System.out.println("No se a podido añadir el representante a " + primario);
+				System.err.println("No se a podido añadir el representante a " + primario);
 			}
 			break;
 		default:
-			System.out.println("Opcion no valida");
+			System.err.println("Opcion no valida");
 			break;
 		}
 	}
@@ -516,7 +516,7 @@ public class Test {
 			control.leerRepresentantes();
 			break;
 		default:
-			System.out.println("Opcion no valida");
+			System.err.println("Opcion no valida");
 			break;
 		}		
 	}

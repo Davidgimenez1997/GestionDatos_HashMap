@@ -136,7 +136,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 
 	@Override
 	public boolean comprobaridactor(Actor nuevo) throws IOException {
-		HashMap<String, Actor> aux = new HashMap<String, Actor>();
+		HashMap<String, Actor> aux = leertodosActores();
 		if (aux.get(nuevo.getId()) != null) {
 			return true;
 		} else {
@@ -231,7 +231,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 			JSONArray arr = new JSONArray();
 			arr.add(obj);
 			document.put("representante", arr);
-			collection.insertOne(document);
+			collection.deleteOne(document);
 			return true;
 		}
 		return false;

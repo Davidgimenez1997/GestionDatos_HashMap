@@ -39,7 +39,11 @@ public class Controlador {
 				System.out.println("Descripcion: " + entry.getValue().getDescripcion());
 				System.out.println("Color de pelo: " + entry.getValue().getPelo());
 				System.out.println("Color de ojos: " + entry.getValue().getOjos());
-				System.out.println("Id del representante: " + entry.getValue().getRepresentante().getId());
+				if(entry.getValue().getRepresentante().getId().equals("null")){
+					System.out.println("Id del representante: Sin representante.");
+				}else{
+					System.out.println("Id del representante: " + entry.getValue().getRepresentante().getId());
+				}
 				cont++;
 			}
 		}

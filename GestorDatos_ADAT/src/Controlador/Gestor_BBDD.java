@@ -17,20 +17,21 @@ import Modelo.Representante;
 public class Gestor_BBDD implements I_GestorDatos {
 
 	private Connection conexion;
+	private static String login,pwd,firstUrl,secondUrl,driver,bbddname,allUrl;
 
 	public Gestor_BBDD(String archivo) throws FileNotFoundException, IOException {
 		Properties p = new Properties();
 		p.load(new FileReader(archivo));
-		String login = p.getProperty("login");
-		String pwd = p.getProperty("pwd");
-		String firsturl = p.getProperty("firsturl");
-		String secondurl = p.getProperty("secondurl");
-		String driver = p.getProperty("driver");
-		String bdname = p.getProperty("bdname");
-		String allurl = firsturl + bdname + secondurl;
+		login = p.getProperty("login");
+		pwd = p.getProperty("pwd");
+		firstUrl = p.getProperty("firsturl");
+		secondUrl = p.getProperty("secondurl");
+		driver = p.getProperty("driver");
+		bbddname = p.getProperty("bdname");
+		allUrl = firstUrl + bbddname + secondUrl;
 		try {
 			Class.forName(driver);
-			conexion = DriverManager.getConnection(allurl, login, pwd);
+			conexion = DriverManager.getConnection(allUrl, login, pwd);
 			if (conexion != null) {
 				System.out.println("Conexion establecida con Base de Datos");
 			}
