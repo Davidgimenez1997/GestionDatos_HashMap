@@ -8,9 +8,9 @@ import Modelo.Actor;
 import Modelo.Representante;
 
 public class Controlador {
+
 	private static I_GestorDatos primario;
 	private static I_GestorDatos secundario;
-
 
 	public void elegirdato(int acceso) throws FileNotFoundException, IOException {
 		if (acceso == 1) {
@@ -19,9 +19,9 @@ public class Controlador {
 			primario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
 		} else if (acceso == 3) {
 			primario = new Gestor_Hibernate();
-		} else if(acceso == 4){
+		} else if (acceso == 4) {
 			primario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
-		} else if(acceso == 5){
+		} else if (acceso == 5) {
 			primario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
 		}
 	}
@@ -29,27 +29,35 @@ public class Controlador {
 	public void leerActores() throws IOException {
 		HashMap<String, Actor> ver = primario.leertodosActores();
 		int cont = 1;
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
-			System.out.println("<---- Actor " + cont + " ---->");
-			System.out.println("Id: " + entry.getValue().getId());
-			System.out.println("Nombre: " + entry.getValue().getNombre());
-			System.out.println("Descripcion: " + entry.getValue().getDescripcion());
-			System.out.println("Color de pelo: " + entry.getValue().getPelo());
-			System.out.println("Color de ojos: " + entry.getValue().getOjos());
-			System.out.println("Id del representante: " + entry.getValue().getRepresentante().getId());
-			cont++;
+		if (ver.size() == 0) {
+			System.out.println("No existen actores actuslmente.");
+		} else {
+			for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+				System.out.println("<---- Actor " + cont + " ---->");
+				System.out.println("Id: " + entry.getValue().getId());
+				System.out.println("Nombre: " + entry.getValue().getNombre());
+				System.out.println("Descripcion: " + entry.getValue().getDescripcion());
+				System.out.println("Color de pelo: " + entry.getValue().getPelo());
+				System.out.println("Color de ojos: " + entry.getValue().getOjos());
+				System.out.println("Id del representante: " + entry.getValue().getRepresentante().getId());
+				cont++;
+			}
 		}
 	}
 
 	public void leerRepresentantes() throws IOException {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		int cont = 1;
-		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
-			System.out.println("<---- Representante " + cont + " ---->");
-			System.out.println("Id: " + entry.getValue().getId());
-			System.out.println("Nombre: " + entry.getValue().getNombre());
-			System.out.println("Edad: " + entry.getValue().getEdad());
-			cont++;
+		if (ver.size() == 0) {
+			System.out.println("No existen representantes actuslmente.");
+		} else {
+			for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+				System.out.println("<---- Representante " + cont + " ---->");
+				System.out.println("Id: " + entry.getValue().getId());
+				System.out.println("Nombre: " + entry.getValue().getNombre());
+				System.out.println("Edad: " + entry.getValue().getEdad());
+				cont++;
+			}
 		}
 	}
 
@@ -117,13 +125,13 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
-		} else if(importar == 4){
+		} else if (importar == 4) {
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
-		} else if(importar == 5){
+		} else if (importar == 5) {
 			secundario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
@@ -152,13 +160,13 @@ public class Controlador {
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
-		} else if (exportar == 4){
+		} else if (exportar == 4) {
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
-		}else if (exportar == 5){
+		} else if (exportar == 5) {
 			secundario = new Gestor_JSON("Ficheros/ConfiguracionMONGO.ini");
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();

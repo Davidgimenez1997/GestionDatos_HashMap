@@ -3,24 +3,16 @@ package Controlador;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.file.DirectoryStream.Filter;
 import java.util.HashMap;
 import java.util.Properties;
-
 import org.bson.Document;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.DeleteResult;
 
 import Modelo.Actor;
 import Modelo.Representante;
@@ -48,10 +40,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public HashMap<String, Actor> leertodosActores() throws IOException {
 		HashMap<String, Actor> aux = new HashMap<String, Actor>();
-		HashMap<String, Representante> auxRepre = new HashMap<>();
 		MongoCollection<Document> collection = database.getCollection(ACTORES);
-		// MongoCollection<Document> documentAll = collection.find();
-		// String jsonDocument = documentAll.toJson();
 		Actor actor = null;
 		Representante representante = null;
 		String idActor, nombreActor, descripcion, pelo, ojos = null;
@@ -69,9 +58,21 @@ public class Gestor_Mongo implements I_GestorDatos {
 			actor = new Actor(idActor, nombreActor, descripcion, pelo, ojos);
 			for (int i = 0; i < arr.size(); i++) {
 				JSONObject row = (JSONObject) arr.get(i);
-				idRepresentante = row.get("id").toString();
-				nombreRepresentantel = row.get("nombre").toString();
-				edad = row.get("edad").toString();
+				if (row.get("id") != null) {
+					idRepresentante = row.get("id").toString();
+				} else {
+					idRepresentante = "null";
+				}
+				if (row.get("nombre") != null) {
+					nombreRepresentantel = row.get("nombre").toString();
+				} else {
+					nombreRepresentantel = "null";
+				}
+				if (row.get("edad") != null) {
+					edad = row.get("edad").toString();
+				} else {
+					edad = "null";
+				}
 				representante = new Representante(idRepresentante, nombreRepresentantel, edad);
 				actor.setRepresentante(representante);
 				aux.put(idActor, actor);
@@ -173,7 +174,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	public boolean borrarTodoActores() throws IOException {
 		MongoCollection<Document> collection = database.getCollection(ACTORES);
 		for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
-			DeleteResult deleteResult = collection.deleteMany(Filters.gte("id", entry.getKey()));
+			collection.deleteMany(Filters.gte("id", entry.getKey()));
 		}
 		return true;
 	}
@@ -183,32 +184,54 @@ public class Gestor_Mongo implements I_GestorDatos {
 		borrarTodoActores();
 		MongoCollection<Document> collection = database.getCollection(REPRESENTANTES);
 		for (HashMap.Entry<String, Representante> entry : leertodosRepresentante().entrySet()) {
-			DeleteResult deleteResult = collection.deleteMany(Filters.gte("id", entry.getKey()));
+			collection.deleteMany(Filters.gte("id", entry.getKey()));
 		}
 		return true;
 	}
 
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
-		// TODO Auto-generated method stub
+		if(leertodosActores().get(idmodificar)!=null){
+			borrarUnActor(idmodificar);
+			modificar.setId(idmodificar);
+			agregarActor(modificar);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-		// TODO Auto-generated method stub
+		if(leertodosRepresentante().get(idmodificar)!=null){
+			borrarUnRepresentante(idmodificar);
+			modificar.setId(idmodificar);
+			agregarRepresentante(modificar);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean borrarUnActor(String Id) throws IOException {
+		MongoCollection<Document> collection = database.getCollection(ACTORES);
 		Actor act;
 		if (leertodosActores().get(Id) != null) {
 			act = leertodosActores().get(Id);
-			MongoCollection<Document> collection = database.getCollection(ACTORES);
-			collection.updateOne(Filters.eq("representante", act.getRepresentante().getId()),
-					new Document("$set", new Document("representante", "null")));
-			// collection.deleteOne(Filters.eq("id", Id));
+			collection.deleteOne(Filters.eq("id", Id));
+			Document document = new Document();
+			document.put("id", act.getId());
+			document.put("nombre", act.getNombre());
+			document.put("descripcion", act.getDescripcion());
+			document.put("pelo", act.getPelo());
+			document.put("ojos", act.getOjos());
+			JSONObject obj = new JSONObject();
+			obj.put("id", "null");
+			obj.put("nombre", "null");
+			obj.put("edad", "null");
+			JSONArray arr = new JSONArray();
+			arr.add(obj);
+			document.put("representante", arr);
+			collection.insertOne(document);
 			return true;
 		}
 		return false;
