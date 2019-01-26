@@ -11,18 +11,25 @@ public class Controlador {
 
 	private static I_GestorDatos primario;
 	private static I_GestorDatos secundario;
+	private static String FICHEROCONFIGURACIONBBDD,FICHEROCONFIGURACIONJSON,FICHEROCONFIGURACIONMONGO;
+	
+	public Controlador(){
+		FICHEROCONFIGURACIONBBDD = "FicherosConfiguracion/ConfiguracionBBDD.ini";
+		FICHEROCONFIGURACIONJSON = "FicherosConfiguracion/ConfiguracionJSON.ini";
+		FICHEROCONFIGURACIONMONGO = "FicherosConfiguracion/ConfiguracionMONGO.ini";
+	}
 
 	public void elegirdato(int acceso) throws FileNotFoundException, IOException {
 		if (acceso == 1) {
 			primario = new Gestor_Fichero();
 		} else if (acceso == 2) {
-			primario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
+			primario = new Gestor_BBDD(FICHEROCONFIGURACIONBBDD);
 		} else if (acceso == 3) {
 			primario = new Gestor_Hibernate();
 		} else if (acceso == 4) {
-			primario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
+			primario = new Gestor_JSON(FICHEROCONFIGURACIONJSON);
 		} else if (acceso == 5) {
-			primario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
+			primario = new Gestor_Mongo(FICHEROCONFIGURACIONMONGO);
 		}
 	}
 
@@ -118,7 +125,7 @@ public class Controlador {
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
 		} else if (importar == 2) {
-			secundario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
+			secundario = new Gestor_BBDD(FICHEROCONFIGURACIONBBDD);
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
@@ -130,13 +137,13 @@ public class Controlador {
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
 		} else if (importar == 4) {
-			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
+			secundario = new Gestor_JSON(FICHEROCONFIGURACIONJSON);
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
 			primario.escribirtodosActores(leer_actores);
 		} else if (importar == 5) {
-			secundario = new Gestor_Mongo("Ficheros/ConfiguracionMONGO.ini");
+			secundario = new Gestor_Mongo(FICHEROCONFIGURACIONMONGO);
 			HashMap<String, Actor> leer_actores = secundario.leertodosActores();
 			HashMap<String, Representante> leer_representante = secundario.leertodosRepresentante();
 			primario.escribirtodosRepresentante(leer_representante);
@@ -153,7 +160,7 @@ public class Controlador {
 			secundario.escribirtodosActores(leer_actores);
 
 		} else if (exportar == 2) {
-			secundario = new Gestor_BBDD("Ficheros/ConfiguracionBBDD.ini");
+			secundario = new Gestor_BBDD(FICHEROCONFIGURACIONBBDD);
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
@@ -165,13 +172,13 @@ public class Controlador {
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
 		} else if (exportar == 4) {
-			secundario = new Gestor_JSON("Ficheros/ConfiguracionJSON.ini");
+			secundario = new Gestor_JSON(FICHEROCONFIGURACIONJSON);
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
 			secundario.escribirtodosActores(leer_actores);
 		} else if (exportar == 5) {
-			secundario = new Gestor_JSON("Ficheros/ConfiguracionMONGO.ini");
+			secundario = new Gestor_JSON(FICHEROCONFIGURACIONMONGO);
 			HashMap<String, Actor> leer_actores = primario.leertodosActores();
 			HashMap<String, Representante> leer_representante = primario.leertodosRepresentante();
 			secundario.escribirtodosRepresentante(leer_representante);
