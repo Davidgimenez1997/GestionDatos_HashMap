@@ -13,7 +13,7 @@ Xampp (PHPMyAdmin).
 
 MongoDB instalado en local.
 
-Windowa 10
+Windows 10
 ```
 
 ### El proyecto se puede dividir en:
