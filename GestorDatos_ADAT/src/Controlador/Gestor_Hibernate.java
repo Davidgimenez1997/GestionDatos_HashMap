@@ -206,8 +206,6 @@ public class Gestor_Hibernate implements I_GestorDatos {
 				obj.setRepresentante(null);
 				s.beginTransaction();
 				s.update(obj);
-				//s.getTransaction().commit();
-				//fin = true;
 			}
 		}
 		Representante obj2 = new Representante();
@@ -216,7 +214,6 @@ public class Gestor_Hibernate implements I_GestorDatos {
 			if(entry.getValue().getId().equals(Id)){
 				System.out.println("ENTRO");
 				obj2 = entry.getValue();
-				//s.beginTransaction();
 				s.delete(obj2);
 				s.getTransaction().commit();
 				fin = true;

@@ -50,7 +50,6 @@ public class Gestor_JSON implements I_GestorDatos {
 			String estado = (String) respuesta.get("estado");
 			if (estado.equals("ok")) {
 				JSONArray actoresarr = (JSONArray) respuesta.get("actores");
-
 				if (actoresarr.size() > 0) {
 					Actor actor;
 					String id;
@@ -60,10 +59,8 @@ public class Gestor_JSON implements I_GestorDatos {
 					String ojos;
 					String str_representante;
 					Representante representante;
-
 					for (int i = 0; i < actoresarr.size(); i++) {
 						JSONObject row = (JSONObject) actoresarr.get(i);
-
 						id = row.get("id").toString();
 						nombre = row.get("nombre").toString();
 						descripcion = row.get("descripcion").toString();
@@ -74,28 +71,20 @@ public class Gestor_JSON implements I_GestorDatos {
 							representante = new Representante(str_representante);
 						} else {
 							str_representante = "null";
-							
 							representante = new Representante(str_representante);
 						}
-
 						actor = new Actor(id, nombre, descripcion, pelo, ojos, (Representante) representante);
-
 						auxhm.put(id, actor);
-
 					}
 				} else {
 					System.out.println("Acceso JSON Remoto - No hay datos que tratar");
 					System.out.println();
 				}
-
 			} else {
-
 				System.out.println("Ha ocurrido un error en la busqueda de datos");
 				System.out.println("Error: " + (String) respuesta.get("error"));
 				System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				System.exit(-1);
-
 			}
 		}
 		return auxhm;
@@ -114,38 +103,28 @@ public class Gestor_JSON implements I_GestorDatos {
 			String estado = (String) respuesta.get("estado");
 			if (estado.equals("ok")) {
 				JSONArray representantearr = (JSONArray) respuesta.get("representante");
-
 				if (representantearr.size() > 0) {
 					Representante representante;
 					String id;
 					String nombre;
 					String edad;
-					;
-
 					for (int i = 0; i < representantearr.size(); i++) {
 						JSONObject row = (JSONObject) representantearr.get(i);
-
 						id = row.get("id").toString();
 						nombre = row.get("nombre").toString();
 						edad = row.get("edad").toString();
 						representante = new Representante(id, nombre, edad);
 						auxhm.put(id, representante);
-
 					}
-
 				} else {
 					System.out.println("Acceso JSON Remoto - No hay datos que tratar");
 					System.out.println();
 				}
-
 			} else {
-
 				System.out.println("Ha ocurrido un error en la busqueda de datos");
 				System.out.println("Error: " + (String) respuesta.get("error"));
 				System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				System.exit(-1);
-
 			}
 		}
 		return auxhm;
@@ -153,148 +132,95 @@ public class Gestor_JSON implements I_GestorDatos {
 
 	@Override
 	public boolean agregarActor(Actor nuevo) throws IOException {
-		/*
-		 * if (!comprobaridactor(nuevo)) { System.out.println(
-		 * "El id del actor esta repetido"); } else {
-		 */
-		try {
-			JSONObject objActor = new JSONObject();
-			JSONObject objPeticion = new JSONObject();
-
-			objActor.put("id", nuevo.getId());
-			objActor.put("nombre", nuevo.getNombre());
-			objActor.put("descripcion", nuevo.getDescripcion());
-			objActor.put("pelo", nuevo.getPelo());
-			objActor.put("ojos", nuevo.getOjos());
-			objActor.put("representante", nuevo.getRepresentante().getId());
-
-			objPeticion.put("actorAnnadir", objActor);
-			objPeticion.put("peticion", "add");
-
-			String json = objPeticion.toJSONString();
-
-			String url = SERVER_PATH + SET_ACTOR;
-
-			String response = encargadoPeticiones.postRequest(url, json);
-
-			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
-			if (respuesta == null) { // Si hay algún error de parseo (json
-										// incorrecto porque hay algún
-										// caracter
-										// raro, etc.) la respuesta será
-										// null
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
-				System.exit(-1);
-			} else { // El JSON recibido es correcto
-
-				// Sera "ok" si todo ha ido bien o "error" si hay algún
-				// problema
-				String estado = (String) respuesta.get("estado");
-				if (estado.equals("ok")) {
-					return true;
-
-				} else { // Hemos recibido el json pero en el estado se nos
-							// indica que ha habido algún error
-
-					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
-					System.out.println("Error: " + (String) respuesta.get("error"));
-					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
+		if (!comprobaridactor(nuevo)) {
+			try {
+				JSONObject objActor = new JSONObject();
+				JSONObject objPeticion = new JSONObject();
+				objActor.put("id", nuevo.getId());
+				objActor.put("nombre", nuevo.getNombre());
+				objActor.put("descripcion", nuevo.getDescripcion());
+				objActor.put("pelo", nuevo.getPelo());
+				objActor.put("ojos", nuevo.getOjos());
+				objActor.put("representante", nuevo.getRepresentante().getId());
+				objPeticion.put("actorAnnadir", objActor);
+				objPeticion.put("peticion", "add");
+				String json = objPeticion.toJSONString();
+				String url = SERVER_PATH + SET_ACTOR;
+				String response = encargadoPeticiones.postRequest(url, json);
+				JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
+				if (respuesta == null) {
+					System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+					System.exit(-1);
+				} else {
+					String estado = (String) respuesta.get("estado");
+					if (estado.equals("ok")) {
+						return true;
+					} else {
+						System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
+						System.out.println("Error: " + (String) respuesta.get("error"));
+						System.out.println("Consulta: " + (String) respuesta.get("query"));
+					}
 				}
+			} catch (Exception e) {
+				System.out.println(
+						"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
+				System.out.println("Fin ejecución");
+				System.exit(-1);
 			}
-		} catch (Exception e) {
-			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
-			System.out.println("Fin ejecución");
-			System.exit(-1);
 		}
-		// }
 		return false;
 	}
 
 	@Override
 	public boolean agregarRepresentante(Representante nuevo) throws IOException {
-
-		/*
-		 * if (!comprobaridrepresentante(nuevo)) { System.out.println(
-		 * "El id del representante esta repetido"); } else {
-		 */
-		try {
-			JSONObject objRepresentante = new JSONObject();
-			JSONObject objPeticion = new JSONObject();
-
-			objRepresentante.put("id", nuevo.getId());
-			objRepresentante.put("nombre", nuevo.getNombre());
-			objRepresentante.put("edad", nuevo.getEdad());
-
-			objPeticion.put("representanteAnnadir", objRepresentante);
-			objPeticion.put("peticion", "add");
-
-			String json = objPeticion.toJSONString();
-
-			String url = SERVER_PATH + SET_REPRESENTANTE;
-
-			String response = encargadoPeticiones.postRequest(url, json);
-			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
-			if (respuesta == null) { // Si hay algún error de parseo (json
-										// incorrecto porque hay algún
-										// caracter
-										// raro, etc.) la respuesta será
-										// null
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
-				System.exit(-1);
-			} else { // El JSON recibido es correcto
-
-				// Sera "ok" si todo ha ido bien o "error" si hay algún
-				// problema
-				String estado = (String) respuesta.get("estado");
-				if (estado.equals("ok")) {
-					return true;
-
-				} else { // Hemos recibido el json pero en el estado se nos
-							// indica que ha habido algún error
-
-					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
-					System.out.println("Error: " + (String) respuesta.get("error"));
-					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
+		if (!comprobaridrepresentante(nuevo)) {
+			try {
+				JSONObject objRepresentante = new JSONObject();
+				JSONObject objPeticion = new JSONObject();
+				objRepresentante.put("id", nuevo.getId());
+				objRepresentante.put("nombre", nuevo.getNombre());
+				objRepresentante.put("edad", nuevo.getEdad());
+				objPeticion.put("representanteAnnadir", objRepresentante);
+				objPeticion.put("peticion", "add");
+				String json = objPeticion.toJSONString();
+				String url = SERVER_PATH + SET_REPRESENTANTE;
+				String response = encargadoPeticiones.postRequest(url, json);
+				JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
+				if (respuesta == null) {
+					System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+					System.exit(-1);
+				} else {
+					String estado = (String) respuesta.get("estado");
+					if (estado.equals("ok")) {
+						return true;
+					} else {
+						System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
+						System.out.println("Error: " + (String) respuesta.get("error"));
+						System.out.println("Consulta: " + (String) respuesta.get("query"));
+					}
 				}
+			} catch (Exception e) {
+				System.out.println(
+						"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
+				System.out.println("Fin ejecución");
+				System.exit(-1);
 			}
-		} catch (Exception e) {
-			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
-			System.out.println("Fin ejecución");
-			System.exit(-1);
 		}
-		// }
 		return false;
 	}
 
 	@Override
 	public boolean comprobaridactor(Actor nuevo) throws IOException {
-		for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
-			if (entry.getKey().equals(nuevo.getId())) {
-				return false;
-			} else {
-				return true;
-			}
+		if (leertodosActores().get(nuevo.getId()) != null) {
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean comprobaridrepresentante(Representante nuevo) throws IOException {
-		// TODO Auto-generated method stub
-		for (HashMap.Entry<String, Representante> entry : leertodosRepresentante().entrySet()) {
-			if (entry.getKey().equals(nuevo.getId())) {
-				return false;
-			} else {
-				return true;
-			}
+		if(leertodosRepresentante().get(nuevo.getId())!=null){
+			return true;
 		}
 		return false;
 	}
@@ -318,11 +244,9 @@ public class Gestor_JSON implements I_GestorDatos {
 	@Override
 	public boolean borrarTodoActores() throws IOException {
 		try {
-
 			String url = SERVER_PATH + DELETE_ACTOR;
 			String response = encargadoPeticiones.getRequest(url);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
@@ -330,23 +254,16 @@ public class Gestor_JSON implements I_GestorDatos {
 				String estado = (String) respuesta.get("estado");
 				if (estado.equals("ok")) {
 					return true;
-
 				} else {
-
 					System.out.println("Ha ocurrido un error en la busqueda de datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 					System.exit(-1);
-
 				}
 			}
-
 		} catch (Exception e) {
 			System.out.println("Ha ocurrido un error en la busqueda de datos");
-
 			e.printStackTrace();
-
 			System.exit(-1);
 		}
 		return false;
@@ -360,31 +277,24 @@ public class Gestor_JSON implements I_GestorDatos {
 			System.out.println("La url a la que lanzamos la petición es " + url);
 			String response = encargadoPeticiones.getRequest(url);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
-
 				if (estado.equals("ok")) {
 					return true;
-
 				} else {
 					System.out.println("Ha ocurrido un error en la busqueda de datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 					System.exit(-1);
-
 				}
 			}
 
 		} catch (Exception e) {
 			System.out.println("Ha ocurrido un error en la busqueda de datos");
-
 			e.printStackTrace();
-
 			System.exit(-1);
 		}
 		return false;
@@ -395,46 +305,34 @@ public class Gestor_JSON implements I_GestorDatos {
 		try {
 			JSONObject objActor = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
-
 			objActor.put("Id", idmodificar);
 			objActor.put("Nombre", modificar.getNombre());
 			objActor.put("Descripcion", modificar.getDescripcion());
 			objActor.put("Pelo", modificar.getPelo());
 			objActor.put("Ojos", modificar.getOjos());
 			objActor.put("Representante", modificar.getRepresentante().getId());
-
 			objPeticion.put("actorModificar", objActor);
 			objPeticion.put("peticion", "update");
-
 			String json = objPeticion.toJSONString();
-
 			String url = SERVER_PATH + UPDATE_ACTOR;
-
 			String response = encargadoPeticiones.postRequest(url, json);
-
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
 				if (estado.equals("ok")) {
-
 					return true;
-
 				} else {
-
 					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(
 					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
@@ -444,51 +342,37 @@ public class Gestor_JSON implements I_GestorDatos {
 
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
-
 		try {
 			JSONObject objRepresentante = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
-
 			objRepresentante.put("id", idmodificar);
 			objRepresentante.put("nombre", modificar.getNombre());
 			objRepresentante.put("edad", modificar.getEdad());
-
 			objPeticion.put("representanteModificar", objRepresentante);
 			objPeticion.put("peticion", "update");
-
 			String json = objPeticion.toJSONString();
-
 			String url = SERVER_PATH + UPDATE_REPRESENTANTE;
-
 			String response = encargadoPeticiones.postRequest(url, json);
-
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
 				if (estado.equals("ok")) {
-
 					return true;
-
 				} else {
-
 					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(
 					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
-
 		return false;
 	}
 
@@ -497,40 +381,29 @@ public class Gestor_JSON implements I_GestorDatos {
 		try {
 			JSONObject objActor = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
-
 			objActor.put("Id", Id);
-
 			objPeticion.put("actorBorrar", objActor);
 			objPeticion.put("peticion", "delete");
-
 			String json = objPeticion.toJSONString();
-
 			String url = SERVER_PATH + DELETE_ONE_ACTOR;
-
 			String response = encargadoPeticiones.postRequest(url, json);
-
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
 				if (estado.equals("ok")) {
-
 					return true;
-
 				} else {
 					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(
 					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
@@ -542,45 +415,32 @@ public class Gestor_JSON implements I_GestorDatos {
 		try {
 			JSONObject objRepresentante = new JSONObject();
 			JSONObject objPeticion = new JSONObject();
-
 			objRepresentante.put("Id", Id);
-
 			objPeticion.put("representanteBorrar", objRepresentante);
 			objPeticion.put("peticion", "delete");
-
 			String json = objPeticion.toJSONString();
-
 			String url = SERVER_PATH + DELETE_ONE_REPRESENTANTE;
-
 			String response = encargadoPeticiones.postRequest(url, json);
-
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
-
 			if (respuesta == null) {
 				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
 				if (estado.equals("ok")) {
-
 					return true;
-
 				} else {
-
 					System.out.println("Acceso JSON REMOTO - Error al almacenar los datos");
 					System.out.println("Error: " + (String) respuesta.get("error"));
 					System.out.println("Consulta: " + (String) respuesta.get("query"));
-
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(
 					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			// e.printStackTrace();
 			System.out.println("Fin ejecución");
 			System.exit(-1);
 		}
 		return false;
 	}
-
 }

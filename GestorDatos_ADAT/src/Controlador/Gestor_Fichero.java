@@ -223,10 +223,8 @@ public class Gestor_Fichero implements I_GestorDatos {
 				act.setPelo(entry.getValue().getPelo());
 				act.setRepresentante(nuevo);
 				entry.setValue(act);
-				//fin = true;
 			}
 		}
-		//escribirtodosActores(ver_actores);
 		if (ver_representantes.containsKey(Id)) {
 			ver_representantes.remove(Id);
 			escribirtodosRepresentante(ver_representantes);
@@ -235,7 +233,6 @@ public class Gestor_Fichero implements I_GestorDatos {
 		} else {
 			fin = false;
 		}
-
 		return fin;
 	}
 

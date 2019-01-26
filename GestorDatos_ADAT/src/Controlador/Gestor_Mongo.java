@@ -44,7 +44,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 		Actor actor = null;
 		Representante representante = null;
 		String idActor, nombreActor, descripcion, pelo, ojos = null;
-		String idRepresentante, nombreRepresentantel, edad = null;
+		String idRepresentante = null;
 		JSONObject obj;
 		JSONArray arr;
 		for (Document document : collection.find()) {
@@ -58,22 +58,12 @@ public class Gestor_Mongo implements I_GestorDatos {
 			actor = new Actor(idActor, nombreActor, descripcion, pelo, ojos);
 			for (int i = 0; i < arr.size(); i++) {
 				JSONObject row = (JSONObject) arr.get(i);
-				if (row.get("id") != null) {
+				if (!row.get("id").equals("null")){
 					idRepresentante = row.get("id").toString();
 				} else {
 					idRepresentante = "null";
 				}
-				if (row.get("nombre") != null) {
-					nombreRepresentantel = row.get("nombre").toString();
-				} else {
-					nombreRepresentantel = "null";
-				}
-				if (row.get("edad") != null) {
-					edad = row.get("edad").toString();
-				} else {
-					edad = "null";
-				}
-				representante = new Representante(idRepresentante, nombreRepresentantel, edad);
+				representante = new Representante(idRepresentante);
 				actor.setRepresentante(representante);
 				aux.put(idActor, actor);
 			}
