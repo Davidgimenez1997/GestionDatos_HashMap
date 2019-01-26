@@ -109,6 +109,8 @@ https://www.mongodb.com/download-center/community
 Una vez descargado, deberemos ir a nuestro ordenador, en la raiz de C, debemos crear una carpeta llamada "Mongo".
 En la carpeta "Mongo" deberemos descomprimir lo que nos acabamos de descargar. Navegaremos hasta dicha ruta con la consola de comandos (CMD) y una vez dentro del directorio navegaremos a la carpeta "bin" y escribiremos "mongod" para ejecutar la base de datos.
 
+Importante: Debes importar los dos json situados en Scrip_Mongo, usando mongoimport.
+
 ### ¿Lo quieres probar?
 
 Te invito a que pruebes este cliente, para su correcto funcionamiento con los 5 tipos de datos necesitaras configurar todos. Para ejecutar el programa debes ir a la carpeta src, dentro de esta al paquete Vista, y en la clase "Test.java" es donde se encuentra el main del programa.
