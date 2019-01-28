@@ -56,7 +56,11 @@ public class Gestor_BBDD implements I_GestorDatos {
 				act.setDescripcion(rset.getString("Descripcion"));
 				act.setPelo(rset.getString("Pelo"));
 				act.setOjos(rset.getString("Ojos"));
-				act.setRepresentante(crearRepresentante(rset.getString("Representante")));
+				if(rset.getString("Representante")!=null){
+					act.setRepresentante(crearRepresentante(rset.getString("Representante")));
+				}else{
+					act.setRepresentante(new Representante("null"));
+				}
 				actoresCreados.put(rset.getString("Id"), act);
 			}
 		} catch (SQLException e) {

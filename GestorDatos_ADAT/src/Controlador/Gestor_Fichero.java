@@ -29,8 +29,13 @@ public class Gestor_Fichero implements I_GestorDatos {
 				act.setDescripcion(partes[2]);
 				act.setPelo(partes[3]);
 				act.setOjos(partes[4]);
-				act.setRepresentante(representantes.get(partes[5]));
-				actores.put(partes[0], act);
+				if (!partes[5].equals("null")) {
+					act.setRepresentante(representantes.get(partes[5]));
+					actores.put(partes[0], act);
+				}else{
+					act.setRepresentante(new Representante("null"));
+					actores.put(partes[0], act);
+				}
 			}
 		}
 		b.close();
@@ -85,7 +90,11 @@ public class Gestor_Fichero implements I_GestorDatos {
 			bw.write(":");
 			bw.write(nuevo.getOjos());
 			bw.write(":");
-			bw.write(nuevo.getRepresentante().getId());
+			if(nuevo.getRepresentante()==null){
+				bw.write("null");
+			}else{
+				bw.write(nuevo.getRepresentante().getId());
+			}
 			bw.write("\n");
 			bw.write("*");
 			bw.write("\n");

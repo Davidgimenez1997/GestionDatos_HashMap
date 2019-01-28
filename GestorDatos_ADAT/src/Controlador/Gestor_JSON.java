@@ -58,7 +58,7 @@ public class Gestor_JSON implements I_GestorDatos {
 					String pelo;
 					String ojos;
 					String str_representante;
-					Representante representante;
+					Representante representante = null;
 					for (int i = 0; i < actoresarr.size(); i++) {
 						JSONObject row = (JSONObject) actoresarr.get(i);
 						id = row.get("id").toString();
@@ -68,7 +68,11 @@ public class Gestor_JSON implements I_GestorDatos {
 						ojos = row.get("ojos").toString();
 						if (row.get("representante") != null) {
 							str_representante = row.get("representante").toString();
-							representante = new Representante(str_representante);
+							if(leertodosRepresentante().get(str_representante)!=null){
+								representante = new Representante(str_representante,
+										leertodosRepresentante().get(str_representante).getNombre(),
+										leertodosRepresentante().get(str_representante).getEdad());	
+							}
 						} else {
 							str_representante = "null";
 							representante = new Representante(str_representante);
@@ -274,7 +278,6 @@ public class Gestor_JSON implements I_GestorDatos {
 		borrarTodoActores();
 		try {
 			String url = SERVER_PATH + DELETE_REPRESENTANTE;
-			System.out.println("La url a la que lanzamos la petición es " + url);
 			String response = encargadoPeticiones.getRequest(url);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {

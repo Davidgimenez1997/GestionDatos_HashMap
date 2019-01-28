@@ -1,4 +1,4 @@
-1:1:1:1:1:1
+1:Johnny:Actor:Rojo:Verde:null
 *
 2:Kaya:Actriz:Café oscuro:Azul:1
 *

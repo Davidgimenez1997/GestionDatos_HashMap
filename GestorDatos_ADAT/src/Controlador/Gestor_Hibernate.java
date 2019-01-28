@@ -36,9 +36,16 @@ public class Gestor_Hibernate implements I_GestorDatos {
 		Query q = s.createQuery("select e from Actor e");
 		List results = q.list();
 		Iterator Iterator = results.iterator();
+		Representante repre;
 		while (Iterator.hasNext()) {
 			Actor actor = (Actor) Iterator.next();
-			actores.put(actor.getId(), actor);
+			if(actor.getRepresentante()==null){
+				repre = new Representante("null");
+				actor.setRepresentante(repre);
+				actores.put(actor.getId(), actor);
+			}else{
+				actores.put(actor.getId(), actor);
+			}
 		}
 		return actores;
 	}
