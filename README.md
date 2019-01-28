@@ -120,7 +120,3 @@ Te invito a que pruebes este cliente, para su correcto funcionamiento con los 5 
 Linkedin: https://www.linkedin.com/in/alberto-gurpegui-ramon/ 
 
 Github: https://github.com/albertogurpegui
-
-
-mongoimport --db gestordatos --file gestorDatos\actores.json --collection actores --jsonArray --drop
-mongoimport --db gestordatos --file gestorDatos\representantes.json --collection representantes --jsonArray --drop
