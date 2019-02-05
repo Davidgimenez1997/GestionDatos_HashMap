@@ -80,7 +80,7 @@ public class Controlador {
 	public void leerActoresId() throws IOException {
 		HashMap<String, Actor> ver = primario.leertodosActores();
 		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
-			System.out.print(entry.getValue().getId() + " ");
+			System.out.print(entry.getValue().getId() + "." + entry.getValue().getNombre() + " ");
 		}
 		System.out.println();
 	}
@@ -88,11 +88,11 @@ public class Controlador {
 	public void leerRepresentantesId() throws IOException {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
-			System.out.print(entry.getValue().getId() + " ");
+			System.out.print(entry.getValue().getId() + "." + entry.getValue().getNombre() + " ");
 		}
 		System.out.println();
 	}
-
+	
 	public Representante escojerRepresentante(String id_repre) throws IOException {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		Representante elegir_repre = null;

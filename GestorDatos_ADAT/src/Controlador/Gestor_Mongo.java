@@ -255,8 +255,8 @@ public class Gestor_Mongo implements I_GestorDatos {
 			MongoCollection<Document> updateCollection2 = database.getCollection(ACTORES);
 
 			//Representante repre = null;
-			for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
-				if(entry.getValue().getRepresentante().getId().equals(idmodificar)){
+			//for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
+				//if(entry.getValue().getRepresentante().getId().equals(idmodificar)){
 					Document query2 = new Document();
 					query2.append("representante.id", modificar.getId());
 					System.out.println("Id del repre " + modificar.getId()+" Nombre: " + modificar.getNombre());
@@ -274,8 +274,8 @@ public class Gestor_Mongo implements I_GestorDatos {
 					update2.append("$set", setData2);
 					
 					updateCollection2.updateMany(query2, update2);
-				}
-			}	
+				//}
+			//}	
 			return true;
 		}
 		return false;
