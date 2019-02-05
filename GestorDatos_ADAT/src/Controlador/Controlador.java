@@ -71,6 +71,11 @@ public class Controlador {
 			}
 		}
 	}
+	
+	public HashMap<String, Representante> getRepresentantes() throws IOException {
+		return primario.leertodosRepresentante();
+	}
+	
 
 	public void leerActoresId() throws IOException {
 		HashMap<String, Actor> ver = primario.leertodosActores();

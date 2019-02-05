@@ -105,7 +105,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 			document.put("descripcion", nuevo.getDescripcion());
 			document.put("pelo", nuevo.getPelo());
 			document.put("ojos", nuevo.getOjos());
-			if(nuevo.getRepresentante()!=null){
+			if (nuevo.getRepresentante() != null) {
 				if (!nuevo.getRepresentante().getId().equals("null")) {
 					JSONObject obj = new JSONObject();
 					obj.put("id", nuevo.getRepresentante().getId());
@@ -114,13 +114,13 @@ public class Gestor_Mongo implements I_GestorDatos {
 					JSONArray arr = new JSONArray();
 					arr.add(obj);
 					document.put("representante", arr);
-				}else{
+				} else {
 					document.put("representante", "null");
 				}
-			}else{
+			} else {
 				document.put("representante", "null");
 			}
-			
+
 			collection.insertOne(document);
 			return true;
 		}
@@ -199,9 +199,37 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		if (leertodosActores().get(idmodificar) != null) {
-			borrarUnActor(idmodificar);
-			modificar.setId(idmodificar);
-			agregarActor(modificar);
+			MongoCollection<Document> updateCollection = database.getCollection(ACTORES);
+			Document query = new Document();
+			query.append("id", idmodificar);
+
+			Document setData = new Document();
+			setData.append("nombre", modificar.getNombre()).append("descripcion", modificar.getDescripcion())
+					.append("pelo", modificar.getPelo()).append("ojos", modificar.getOjos());
+
+			if (modificar.getRepresentante() != null) {
+				if (!modificar.getRepresentante().getId().equals("null")) {
+					JSONObject obj = new JSONObject();
+					
+					Representante repre = modificar.getRepresentante();
+					
+					System.out.println("Id del repre "+repre.getId()+" Nombre del repre "+repre.getNombre());
+					obj.put("id", repre.getId());
+					obj.put("nombre", repre.getNombre());
+					obj.put("edad", repre.getEdad());
+					JSONArray arr = new JSONArray();
+					arr.add(obj);
+					setData.append("representante", arr);
+				} else {
+					setData.append("representante", "null");
+				}
+			} else {
+				setData.append("representante", "null");
+			}
+
+			Document update = new Document();
+			update.append("$set", setData);
+			updateCollection.updateOne(query, update);
 			return true;
 		}
 		return false;
@@ -210,9 +238,44 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public boolean modificarUnRepresentante(String idmodificar, Representante modificar) throws IOException {
 		if (leertodosRepresentante().get(idmodificar) != null) {
-			borrarUnRepresentante(idmodificar);
-			modificar.setId(idmodificar);
-			agregarRepresentante(modificar);
+			MongoCollection<Document> updateCollection = database.getCollection(REPRESENTANTES);
+			Document query = new Document();
+			query.append("id", idmodificar);
+
+			Document setData = new Document();
+			setData.append("id", modificar.getId())
+			.append("nombre", modificar.getNombre())
+			.append("edad",modificar.getEdad());
+
+			Document update = new Document();
+			update.append("$set", setData);
+			
+			updateCollection.updateOne(query, update);
+			
+			MongoCollection<Document> updateCollection2 = database.getCollection(ACTORES);
+
+			//Representante repre = null;
+			for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
+				if(entry.getValue().getRepresentante().getId().equals(idmodificar)){
+					Document query2 = new Document();
+					query2.append("representante.id", modificar.getId());
+					System.out.println("Id del repre " + modificar.getId()+" Nombre: " + modificar.getNombre());
+					JSONObject obj = new JSONObject();
+					obj.put("id", modificar.getId());
+					obj.put("nombre", modificar.getNombre());
+					obj.put("edad", modificar.getEdad());
+					JSONArray arr = new JSONArray();
+					arr.add(obj);
+					
+					Document setData2 = new Document();
+					setData2.append("representante", arr);
+					
+					Document update2 = new Document();
+					update2.append("$set", setData2);
+					
+					updateCollection2.updateMany(query2, update2);
+				}
+			}	
 			return true;
 		}
 		return false;

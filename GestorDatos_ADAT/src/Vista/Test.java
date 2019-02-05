@@ -281,11 +281,13 @@ public class Test {
 		String nuevopelo = teclado.nextLine();
 		System.out.println("Escriba el nuevo color de ojos");
 		String nuevoojos = teclado.nextLine();
-		System.out.println("Id de los representantes escoja uno:");
+		System.out.println("Id de los representantes escoja uno (Para no tener representante escriba null) :");
 		control.leerRepresentantesId();
 		System.out.println("Escriba el nuevo id del representante");
 		String nuevorepre = teclado.nextLine();
-		Representante obj = new Representante(nuevorepre);
+		
+		Representante obj = control.getRepresentantes().get(nuevorepre);
+		
 		Actor actmodificar = new Actor(modificar, nuevonombre, nuevadescr, nuevopelo, nuevoojos, obj);
 		if (control.modificarUnActor(modificar, actmodificar)) {
 			System.out.println("Actor modificado correctamente de " + primario);
