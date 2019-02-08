@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import Modelo.Actor;
 import Modelo.Representante;
@@ -66,7 +67,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 	@Override
 	public boolean comprobaridactor(Actor nuevo) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
 				System.out.println("Id del actor repetido");
 				return true;
@@ -107,7 +108,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 	@Override
 	public boolean comprobaridrepresentante(Representante nuevo) throws IOException {
 		HashMap<String, Representante> ver = leertodosRepresentante();
-		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+		for (Entry<String, Representante> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(nuevo.getId())) {
 				System.out.println("Id del representante repetido");
 				return true;
@@ -138,7 +139,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
 		borrarTodoActores();
-		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+		for (Entry<String, Actor> entry : lista.entrySet()) {
 			agregarActor(lista.get(entry.getKey()));
 		}
 	}
@@ -146,7 +147,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
 		borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+		for (Entry<String, Representante> entry : lista.entrySet()) {
 			agregarRepresentante(lista.get(entry.getKey()));
 		}
 	}
@@ -172,7 +173,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
 		boolean fin = false;
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {
 				entry.setValue(modificar);
 				fin = true;
@@ -189,7 +190,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 		HashMap<String, Representante> ver_repre = leertodosRepresentante();
 		HashMap<String, Actor> ver_actor = leertodosActores();
 		boolean fin = false;
-		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
+		for (Entry<String, Representante> entry : ver_repre.entrySet()) {
 			if (entry.getKey().equals(idmodificar)) {
 				entry.setValue(modificar);
 				fin = true;
@@ -223,7 +224,7 @@ public class Gestor_Fichero implements I_GestorDatos {
 		boolean fin = false;
 		Actor act = new Actor();
 		Representante nuevo = new Representante("NULL");
-		for (HashMap.Entry<String, Actor> entry : ver_actores.entrySet()) {
+		for (Entry<String, Actor> entry : ver_actores.entrySet()) {
 			if (entry.getValue().getRepresentante().getId().equals(Id)) {
 				act.setId(entry.getValue().getId());
 				act.setNombre(entry.getValue().getNombre());

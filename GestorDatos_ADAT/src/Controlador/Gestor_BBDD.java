@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import Modelo.Actor;
@@ -36,7 +37,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 				System.out.println("Conexion establecida con Base de Datos");
 			}
 		} catch (Exception e) {
-			System.out.println(" – Error de Conexión con MySQL -");
+			System.out.println(" ï¿½ Error de Conexiï¿½n con MySQL -");
 			e.printStackTrace();
 		}
 	}
@@ -114,7 +115,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 			pstm = conexion.prepareStatement("select id FROM actores where id = " + nuevo.getId());
 			ResultSet rset = pstm.executeQuery();
 			while (rset.next()) {
-				for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+				for (Entry<String, Actor> entry : ver.entrySet()) {
 					if (entry.getValue().getId().equals(nuevo.getId())) {
 						System.out.println("Id del actor repetido");
 						return true;
@@ -162,7 +163,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 			ResultSet rset = pstm.executeQuery();
 			while (rset.next()) {
 				for (int i = 0; i < leertodosActores().size(); i++) {
-					for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+					for (Entry<String, Representante> entry : ver.entrySet()) {
 						if (entry.getValue().getId().equals(nuevo.getId())) {
 							System.out.println("Id del representante repetido");
 							return true;
@@ -202,7 +203,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
 		borrarTodoActores();
-		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+		for (Entry<String, Actor> entry : lista.entrySet()) {
 			agregarActor(lista.get(entry.getKey()));
 		}
 	}
@@ -210,7 +211,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
 		borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+		for (Entry<String, Representante> entry : lista.entrySet()) {
 			agregarRepresentante(lista.get(entry.getKey()));
 		}
 	}
@@ -249,7 +250,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 	public boolean modificarUnActor(String idmodificar, Actor modificar) throws IOException {
 		HashMap<String, Actor> ver = leertodosActores();
 		PreparedStatement pstm;
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {
 				try {
 					pstm = conexion.prepareStatement("UPDATE actores SET " + "Nombre = ?" + ",Descripcion = ?"
@@ -276,7 +277,7 @@ public class Gestor_BBDD implements I_GestorDatos {
 		PreparedStatement pstm;
 		HashMap<String, Representante> ver_repre = leertodosRepresentante();
 		boolean fin = false;
-		for (HashMap.Entry<String, Representante> entry : ver_repre.entrySet()) {
+		for (Entry<String, Representante> entry : ver_repre.entrySet()) {
 			if (entry.getKey().contains(idmodificar)) {
 				try {
 					pstm = conexion.prepareStatement("UPDATE representantes SET " + "Nombre = ?" + ",Edad = ?" + "WHERE Id=?");

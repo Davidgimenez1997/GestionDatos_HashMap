@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -118,7 +120,7 @@ public class Gestor_Hibernate implements I_GestorDatos {
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
 		borrarTodoActores();
-		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+		for (Entry<String, Actor> entry : lista.entrySet()) {
 			agregarActor(lista.get(entry.getKey()));
 		}
 	}
@@ -126,7 +128,7 @@ public class Gestor_Hibernate implements I_GestorDatos {
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
 		borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+		for (Entry<String, Representante> entry : lista.entrySet()) {
 			agregarRepresentante(lista.get(entry.getKey()));
 		}
 	}
@@ -188,7 +190,7 @@ public class Gestor_Hibernate implements I_GestorDatos {
 		boolean fin = false;
 		Actor obj = new Actor();
 		HashMap<String, Actor> ver = leertodosActores();
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			if(entry.getValue().getId().equals(Id)){
 				System.out.println("ENTRO");
 				obj = entry.getValue();
@@ -206,7 +208,7 @@ public class Gestor_Hibernate implements I_GestorDatos {
 		boolean fin = false;
 		Actor obj = new Actor();
 		HashMap<String, Actor> ver = leertodosActores();
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			if(entry.getValue().getRepresentante().getId().equals(Id)){
 				System.out.println("ENTRO");
 				obj = entry.getValue();
@@ -217,7 +219,7 @@ public class Gestor_Hibernate implements I_GestorDatos {
 		}
 		Representante obj2 = new Representante();
 		HashMap<String, Representante> ver2 = leertodosRepresentante();
-		for (HashMap.Entry<String, Representante> entry : ver2.entrySet()) {
+		for (Entry<String, Representante> entry : ver2.entrySet()) {
 			if(entry.getValue().getId().equals(Id)){
 				System.out.println("ENTRO");
 				obj2 = entry.getValue();

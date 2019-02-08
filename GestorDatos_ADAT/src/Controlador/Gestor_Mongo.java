@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 import org.bson.Document;
 import org.json.simple.JSONArray;
@@ -164,7 +165,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
 		borrarTodoActores();
-		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+		for (Entry<String, Actor> entry : lista.entrySet()) {
 			agregarActor(lista.get(entry.getKey()));
 		}
 	}
@@ -172,7 +173,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
 		borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+		for (Entry<String, Representante> entry : lista.entrySet()) {
 			agregarRepresentante(lista.get(entry.getKey()));
 		}
 	}
@@ -180,7 +181,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public boolean borrarTodoActores() throws IOException {
 		MongoCollection<Document> collection = database.getCollection(ACTORES);
-		for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
+		for (Entry<String, Actor> entry : leertodosActores().entrySet()) {
 			collection.deleteMany(Filters.gte("id", entry.getKey()));
 		}
 		return true;
@@ -190,7 +191,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	public boolean borrarTodoRepresentantes() throws IOException {
 		borrarTodoActores();
 		MongoCollection<Document> collection = database.getCollection(REPRESENTANTES);
-		for (HashMap.Entry<String, Representante> entry : leertodosRepresentante().entrySet()) {
+		for (Entry<String, Representante> entry : leertodosRepresentante().entrySet()) {
 			collection.deleteMany(Filters.gte("id", entry.getKey()));
 		}
 		return true;
@@ -294,7 +295,7 @@ public class Gestor_Mongo implements I_GestorDatos {
 	@Override
 	public boolean borrarUnRepresentante(String Id) throws IOException {
 		if (leertodosRepresentante().get(Id) != null) {
-			for (HashMap.Entry<String, Actor> entry : leertodosActores().entrySet()) {
+			for (Entry<String, Actor> entry : leertodosActores().entrySet()) {
 				if (entry.getValue().getRepresentante().getId().equals(Id)) {
 					MongoCollection<Document> updateCollection = database.getCollection(ACTORES);
 					Document query = new Document();

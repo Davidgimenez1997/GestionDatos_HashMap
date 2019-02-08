@@ -3,6 +3,7 @@ package Controlador;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import Modelo.Actor;
 import Modelo.Representante;
@@ -39,7 +40,7 @@ public class Controlador {
 		if (ver.size() == 0) {
 			System.out.println("No existen actores actuslmente.");
 		} else {
-			for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+			for (Entry<String, Actor> entry : ver.entrySet()) {
 				System.out.println("<---- Actor " + cont + " ---->");
 				System.out.println("Id: " + entry.getValue().getId());
 				System.out.println("Nombre: " + entry.getValue().getNombre());
@@ -62,7 +63,7 @@ public class Controlador {
 		if (ver.size() == 0) {
 			System.out.println("No existen representantes actuslmente.");
 		} else {
-			for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+			for (Entry<String, Representante> entry : ver.entrySet()) {
 				System.out.println("<---- Representante " + cont + " ---->");
 				System.out.println("Id: " + entry.getValue().getId());
 				System.out.println("Nombre: " + entry.getValue().getNombre());
@@ -79,7 +80,7 @@ public class Controlador {
 
 	public void leerActoresId() throws IOException {
 		HashMap<String, Actor> ver = primario.leertodosActores();
-		for (HashMap.Entry<String, Actor> entry : ver.entrySet()) {
+		for (Entry<String, Actor> entry : ver.entrySet()) {
 			System.out.print(entry.getValue().getId() + "." + entry.getValue().getNombre() + " ");
 		}
 		System.out.println();
@@ -87,7 +88,7 @@ public class Controlador {
 
 	public void leerRepresentantesId() throws IOException {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
-		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+		for (Entry<String, Representante> entry : ver.entrySet()) {
 			System.out.print(entry.getValue().getId() + "." + entry.getValue().getNombre() + " ");
 		}
 		System.out.println();
@@ -97,7 +98,7 @@ public class Controlador {
 		HashMap<String, Representante> ver = primario.leertodosRepresentante();
 		Representante elegir_repre = null;
 		String id = null, name = null, edad = null;
-		for (HashMap.Entry<String, Representante> entry : ver.entrySet()) {
+		for (Entry<String, Representante> entry : ver.entrySet()) {
 			if (entry.getValue().getId().equals(id_repre)) {
 				id = entry.getValue().getId();
 				name = entry.getValue().getNombre();

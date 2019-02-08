@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.json.simple.JSONArray;
@@ -44,7 +45,7 @@ public class Gestor_JSON implements I_GestorDatos {
 		String response = encargadoPeticiones.getRequest(url);
 		JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 		if (respuesta == null) {
-			System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+			System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 			System.exit(-1);
 		} else {
 			String estado = (String) respuesta.get("estado");
@@ -101,7 +102,7 @@ public class Gestor_JSON implements I_GestorDatos {
 		String response = encargadoPeticiones.getRequest(url);
 		JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 		if (response == null) {
-			System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+			System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 			System.exit(-1);
 		} else {
 			String estado = (String) respuesta.get("estado");
@@ -153,7 +154,7 @@ public class Gestor_JSON implements I_GestorDatos {
 				String response = encargadoPeticiones.postRequest(url, json);
 				JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 				if (respuesta == null) {
-					System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+					System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 					System.exit(-1);
 				} else {
 					String estado = (String) respuesta.get("estado");
@@ -167,8 +168,8 @@ public class Gestor_JSON implements I_GestorDatos {
 				}
 			} catch (Exception e) {
 				System.out.println(
-						"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-				System.out.println("Fin ejecución");
+						"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+				System.out.println("Fin ejecuciï¿½n");
 				System.exit(-1);
 			}
 		}
@@ -191,7 +192,7 @@ public class Gestor_JSON implements I_GestorDatos {
 				String response = encargadoPeticiones.postRequest(url, json);
 				JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 				if (respuesta == null) {
-					System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+					System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 					System.exit(-1);
 				} else {
 					String estado = (String) respuesta.get("estado");
@@ -205,8 +206,8 @@ public class Gestor_JSON implements I_GestorDatos {
 				}
 			} catch (Exception e) {
 				System.out.println(
-						"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-				System.out.println("Fin ejecución");
+						"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+				System.out.println("Fin ejecuciï¿½n");
 				System.exit(-1);
 			}
 		}
@@ -232,7 +233,7 @@ public class Gestor_JSON implements I_GestorDatos {
 	@Override
 	public void escribirtodosActores(HashMap<String, Actor> lista) throws IOException {
 		borrarTodoActores();
-		for (HashMap.Entry<String, Actor> entry : lista.entrySet()) {
+		for (Entry<String, Actor> entry : lista.entrySet()) {
 			agregarActor(lista.get(entry.getKey()));
 		}
 	}
@@ -240,7 +241,7 @@ public class Gestor_JSON implements I_GestorDatos {
 	@Override
 	public void escribirtodosRepresentante(HashMap<String, Representante> lista) throws IOException {
 		borrarTodoRepresentantes();
-		for (HashMap.Entry<String, Representante> entry : lista.entrySet()) {
+		for (Entry<String, Representante> entry : lista.entrySet()) {
 			agregarRepresentante(lista.get(entry.getKey()));
 		}
 	}
@@ -252,7 +253,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.getRequest(url);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -281,7 +282,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.getRequest(url);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -321,7 +322,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.postRequest(url, json);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -335,8 +336,8 @@ public class Gestor_JSON implements I_GestorDatos {
 			}
 		} catch (Exception e) {
 			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			System.out.println("Fin ejecución");
+					"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+			System.out.println("Fin ejecuciï¿½n");
 			System.exit(-1);
 		}
 
@@ -358,7 +359,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.postRequest(url, json);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -372,8 +373,8 @@ public class Gestor_JSON implements I_GestorDatos {
 			}
 		} catch (Exception e) {
 			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			System.out.println("Fin ejecución");
+					"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+			System.out.println("Fin ejecuciï¿½n");
 			System.exit(-1);
 		}
 		return false;
@@ -392,7 +393,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.postRequest(url, json);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -406,8 +407,8 @@ public class Gestor_JSON implements I_GestorDatos {
 			}
 		} catch (Exception e) {
 			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			System.out.println("Fin ejecución");
+					"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+			System.out.println("Fin ejecuciï¿½n");
 			System.exit(-1);
 		}
 		return false;
@@ -426,7 +427,7 @@ public class Gestor_JSON implements I_GestorDatos {
 			String response = encargadoPeticiones.postRequest(url, json);
 			JSONObject respuesta = (JSONObject) JSONValue.parse(response.toString());
 			if (respuesta == null) {
-				System.out.println("El json recibido no es correcto. Finaliza la ejecución");
+				System.out.println("El json recibido no es correcto. Finaliza la ejecuciï¿½n");
 				System.exit(-1);
 			} else {
 				String estado = (String) respuesta.get("estado");
@@ -440,8 +441,8 @@ public class Gestor_JSON implements I_GestorDatos {
 			}
 		} catch (Exception e) {
 			System.out.println(
-					"Excepcion desconocida. Traza de error comentada en el método 'annadirEquipo' de la clase JSON REMOTO");
-			System.out.println("Fin ejecución");
+					"Excepcion desconocida. Traza de error comentada en el mï¿½todo 'annadirEquipo' de la clase JSON REMOTO");
+			System.out.println("Fin ejecuciï¿½n");
 			System.exit(-1);
 		}
 		return false;
